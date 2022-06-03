@@ -1,13 +1,56 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { isDebug } from '../../lib/isDebug'
+import { validateJwt } from '../../lib/jwt'
+
+import type { CloudflareJwt } from '../../lib/jwt'
+import type { ApiResponse } from './type'
+import type { IncomingHttpHeaders } from 'http'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
+export type HelloResponse = ApiResponse<CloudflareJwt>
+
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<HelloResponse>
+) => {
+  try {
+    const payload = await validateJwtPayload(req.headers)
+
+    res.status(200).json({
+      success: true,
+      ...payload,
+    })
+  } catch (error) {
+    console.error(error)
+
+    res.status(403).json({
+      success: false,
+      error: `${error}`,
+    })
+  }
 }
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
+export const validateJwtPayload = async (
+  headers: IncomingHttpHeaders
+): Promise<CloudflareJwt> => {
+  const token = extractJwt(headers)
+  if (!token) {
+    throw new Error('No token provided.')
+  }
+
+  return await validateJwt(token)
 }
+
+const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {
+  if (isDebug) {
+    return process.env.CF_JWT
+  }
+
+  const value = headers['cf-access-jwt-assertion']
+  if (typeof value !== 'string') {
+    return undefined
+  }
+
+  return value
+}
+
+export default handler
