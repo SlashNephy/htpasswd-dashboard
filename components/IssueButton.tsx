@@ -28,6 +28,8 @@ import {
   UserPlus,
 } from 'tabler-icons-react'
 
+import nextConfigJs from '../next.config.js'
+
 import type {
   IssueResponse,
   StatusResponse,
@@ -48,17 +50,22 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
   const { data: status, isError } = useQuery<StatusResponse>(
     ['status', service.name],
     async () =>
-      fetch(`/api/token/${service.name.toLowerCase()}/status`).then(
-        async (res) => res.json()
-      )
+      fetch(
+        `${
+          nextConfigJs.basePath
+        }/api/token/${service.name.toLowerCase()}/status`
+      ).then(async (res) => res.json())
   )
   const [issue, setIssue] = React.useState<IssueResponse & { success: true }>()
   const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   const handleClick = () => {
-    void fetch(`/api/token/${service.name.toLowerCase()}/issue`, {
-      method: 'PUT',
-    })
+    void fetch(
+      `${nextConfigJs.basePath}/api/token/${service.name.toLowerCase()}/issue`,
+      {
+        method: 'PUT',
+      }
+    )
       .then(async (response) => (await response.json()) as IssueResponse)
       .then(async (response) => {
         if (response.success) {

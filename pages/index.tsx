@@ -20,6 +20,7 @@ import { useQuery } from 'react-query'
 import { Heart, InfoCircle, MoonStars, Package, Sun } from 'tabler-icons-react'
 
 import { IssueButton } from '../components/IssueButton'
+import nextConfigJs from '../next.config.js'
 import packageJson from '../package.json'
 
 import type { HelloResponse } from './api/hello'
@@ -28,7 +29,7 @@ import type { NextPage } from 'next'
 const Home: NextPage = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const { data: hello } = useQuery<HelloResponse>('hello', async () =>
-    fetch('/api/hello').then(async (res) => res.json())
+    fetch(`${nextConfigJs.basePath}/api/hello`).then(async (res) => res.json())
   )
 
   if (!hello || !hello.success) {
@@ -113,14 +114,14 @@ const Home: NextPage = () => {
                 {
                   name: 'EPGStation',
                   url: 'https://atmos.starry.blue',
-                  imageUrl: '/epgstation.jpeg',
+                  imageUrl: `${nextConfigJs.basePath}/epgstation.jpeg`,
                   apiUrl: 'https://anemos.starry.blue/api',
                   exampleApiUrl: 'https://anemos.starry.blue/api/version',
                 },
                 {
                   name: 'Mirakurun',
                   url: 'https://apps.starry.blue/mirakurun',
-                  imageUrl: '/mirakurun.webp',
+                  imageUrl: `${nextConfigJs.basePath}/mirakurun.webp`,
                   apiUrl: 'https://atmos.starry.blue/mirakurun',
                   exampleApiUrl: 'https://atmos.starry.blue/mirakurun/status',
                 },
