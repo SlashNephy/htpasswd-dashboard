@@ -122,8 +122,9 @@ class HtpasswdFile {
         }
       })
       .join('\n')
+      .trim()
 
-    await writeFile(this.path, content)
+    await writeFile(this.path, `${content}\n`)
   }
 }
 
