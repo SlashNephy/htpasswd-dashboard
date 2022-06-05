@@ -19,7 +19,7 @@
     "@mantine/core": "4.2.8",
     "@mantine/hooks": "4.2.8",
     "@mantine/next": "4.2.8",
-    "@mantine/notifications": "4.2.7",
+    "@mantine/notifications": "4.2.8",
     "async-mutex": "0.3.2",
     "bcrypt": "5.0.1",
     "gravatar": "1.8.2",
