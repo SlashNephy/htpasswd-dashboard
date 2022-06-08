@@ -25,7 +25,7 @@
     "gravatar": "1.8.2",
     "jsonwebtoken": "8.5.1",
     "jwks-rsa": "2.1.4",
-    "nanoid": "3.3.4",
+    "nanoid": "4.0.0",
     "next": "12.1.6",
     "next-auth": "4.3.4",
     "nodejs-jwt-validator": "0.1.4",
