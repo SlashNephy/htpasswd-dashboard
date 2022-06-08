@@ -686,7 +686,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:8.5.8":
+"@types/jsonwebtoken@npm:8.5.8, @types/jsonwebtoken@npm:^8.5.8":
   version: 8.5.8
   resolution: "@types/jsonwebtoken@npm:8.5.8"
   dependencies:
@@ -1209,7 +1209,7 @@ __metadata:
     eslint-plugin-unused-imports: 2.0.0
     gravatar: 1.8.2
     jsonwebtoken: 8.5.1
-    jwks-rsa: 2.1.3
+    jwks-rsa: 2.1.4
     nanoid: 3.3.4
     next: 12.1.6
     next-auth: 4.3.4
@@ -3111,16 +3111,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jwks-rsa@npm:2.1.3":
-  version: 2.1.3
-  resolution: "jwks-rsa@npm:2.1.3"
+"jwks-rsa@npm:2.1.4":
+  version: 2.1.4
+  resolution: "jwks-rsa@npm:2.1.4"
   dependencies:
     "@types/express": ^4.17.13
+    "@types/jsonwebtoken": ^8.5.8
     debug: ^4.3.4
     jose: ^2.0.5
     limiter: ^1.1.5
     lru-memoizer: ^2.1.4
-  checksum: 8ae7dc74b24c33505a6a4251f274f912abb2d98796cfb28f877f54de582a26588e3716230ce926b29667af71d913e9cfc707842060a1371e56c786687903491e
+  checksum: 20de148da46e1dfafeb9068b733d69dbc0bed4e44104bbf4adf991de6a325010eaa1a32487bd2c97931d96da12faeaf3b9f8fbbec9a0ddfcd487f82f719fd438
   languageName: node
   linkType: hard
 
