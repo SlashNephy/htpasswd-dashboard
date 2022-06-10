@@ -1212,7 +1212,7 @@ __metadata:
     jwks-rsa: 2.1.4
     nanoid: 4.0.0
     next: 12.1.6
-    next-auth: 4.3.4
+    next-auth: 4.4.0
     nodejs-jwt-validator: 0.1.4
     prettier: 2.6.2
     react: 18.1.0
@@ -3577,9 +3577,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:4.3.4":
-  version: 4.3.4
-  resolution: "next-auth@npm:4.3.4"
+"next-auth@npm:4.4.0":
+  version: 4.4.0
+  resolution: "next-auth@npm:4.4.0"
   dependencies:
     "@babel/runtime": ^7.16.3
     "@panva/hkdf": ^1.0.1
@@ -3597,7 +3597,7 @@ __metadata:
   peerDependenciesMeta:
     nodemailer:
       optional: true
-  checksum: 4b5f6f6d3fa070d168c8dd92a0aae54adaef2a637bad092df34135f3541ec4b9a6616b2eeead49b95b2da18287f485d9e8fe4b9f0116019e4dc08acccedbfff9
+  checksum: 9e8994b4f07640badd13358bfbeeeb8d3e9ee790928023dc56e26bedede5783d7341b1ebf2fb0a7f392b7cb923a0c62efd6bd529964fcdbdc2470958398b709f
   languageName: node
   linkType: hard
 
