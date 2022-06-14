@@ -53,4 +53,5 @@ const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {
   return value
 }
 
+// eslint-disable-next-line import/no-default-export
 export default handler

@@ -15,7 +15,7 @@ type HtpasswdEntry =
 class HtpasswdFile {
   private readonly path: string
 
-  constructor(path: string) {
+  public constructor(path: string) {
     this.path = path
   }
 
@@ -53,7 +53,7 @@ class HtpasswdFile {
     }
   }
 
-  async has(username: string): Promise<boolean> {
+  public async has(username: string): Promise<boolean> {
     const escapedUsername = HtpasswdFile.escapeUsername(username)
     const entries = await this.parse()
     return entries.some(
@@ -85,7 +85,9 @@ class HtpasswdFile {
     return username.replace('@', '.')
   }
 
-  async append(username: string): Promise<{ username: string; token: string }> {
+  public async append(
+    username: string
+  ): Promise<{ username: string; token: string }> {
     const { token, hashedToken } = await HtpasswdFile.issueToken()
 
     const escapedUsername = HtpasswdFile.escapeUsername(username)
