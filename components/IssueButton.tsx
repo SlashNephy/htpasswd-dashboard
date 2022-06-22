@@ -30,18 +30,11 @@ import {
 
 import nextConfigJs from '../next.config.js'
 
+import type { Service } from '../lib/services'
 import type {
   IssueResponse,
   StatusResponse,
 } from '../pages/api/token/[...slug]'
-
-export type Service = {
-  name: string
-  url: string
-  imageUrl: string
-  apiUrl: string
-  exampleApiUrl: string
-}
 
 export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
   const theme = useMantineTheme()
