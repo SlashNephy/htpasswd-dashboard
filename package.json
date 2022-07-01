@@ -26,7 +26,7 @@
     "jsonwebtoken": "8.5.1",
     "jwks-rsa": "2.1.4",
     "nanoid": "4.0.0",
-    "next": "12.1.6",
+    "next": "12.2.0",
     "next-auth": "4.6.1",
     "nodejs-jwt-validator": "0.1.4",
     "react": "18.2.0",
