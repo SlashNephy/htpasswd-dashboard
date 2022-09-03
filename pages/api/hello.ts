@@ -53,5 +53,4 @@ const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {
   return value
 }
 
-
 export default handler
