@@ -20,7 +20,7 @@
     "@mantine/hooks": "4.2.12",
     "@mantine/next": "4.2.12",
     "@mantine/notifications": "4.2.12",
-    "async-mutex": "0.3.2",
+    "async-mutex": "0.4.0",
     "bcrypt": "5.0.1",
     "gravatar": "1.8.2",
     "jsonwebtoken": "8.5.1",
