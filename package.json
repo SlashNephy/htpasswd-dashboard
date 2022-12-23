@@ -35,7 +35,7 @@
     "tabler-icons-react": "1.55.0"
   },
   "devDependencies": {
-    "@slashnephy/eslint-config": "0.2.29",
+    "@slashnephy/eslint-config": "0.2.30",
     "@slashnephy/prettier-config": "0.1.1",
     "@types/bcrypt": "5.0.0",
     "@types/gravatar": "1.8.3",
