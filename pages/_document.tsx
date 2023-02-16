@@ -1,5 +1,6 @@
 import { createGetInitialProps } from '@mantine/next'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import React from 'react'
 
 const getInitialProps = createGetInitialProps()
 
@@ -7,7 +8,7 @@ class MyDocument extends Document {
   public static getInitialProps = getInitialProps
 
   // noinspection HtmlRequiredTitleElement
-  public render = () => (
+  public render = (): React.ReactElement => (
     <Html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico" />

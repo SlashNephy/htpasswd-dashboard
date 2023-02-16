@@ -2,6 +2,7 @@ import { readFile, lstat, writeFile } from 'fs/promises'
 
 import { genSalt, hash } from 'bcrypt'
 import { nanoid } from 'nanoid'
+import { z } from 'zod'
 
 type HtpasswdEntry =
   | {
@@ -19,8 +20,69 @@ class HtpasswdFile {
     this.path = path
   }
 
-  private async parse(): Promise<HtpasswdEntry[]> {
-    if (!(await this.exists())) {
+  private static async _hashToken(token: string): Promise<string> {
+    const salt = await genSalt(5)
+
+    return await hash(token, salt)
+  }
+
+  private static async _issueToken(): Promise<{
+    token: string
+    hashedToken: string
+  }> {
+    const token = nanoid(64)
+    const hashedToken = await HtpasswdFile._hashToken(token)
+
+    return {
+      token,
+      hashedToken,
+    }
+  }
+
+  // @ は URI エンコードが必要なので避ける
+  private static _escapeUsername(username: string): string {
+    return username.replace('@', '.')
+  }
+
+  public async has(username: string): Promise<boolean> {
+    const escapedUsername = HtpasswdFile._escapeUsername(username)
+    const entries = await this._parse()
+    return entries.some(
+      (entry) => 'username' in entry && entry.username === escapedUsername
+    )
+  }
+
+  public async append(
+    username: string
+  ): Promise<{ username: string; token: string }> {
+    const { token, hashedToken } = await HtpasswdFile._issueToken()
+
+    const escapedUsername = HtpasswdFile._escapeUsername(username)
+    const entry = {
+      username: escapedUsername,
+      token: hashedToken,
+    }
+
+    const entries = await this._parse()
+    const index = entries.findIndex(
+      (entry) => 'username' in entry && entry.username === escapedUsername
+    )
+    if (index >= 0) {
+      entries[index] = entry
+    } else {
+      entries.push(entry)
+    }
+
+    await this._write(entries)
+
+    return {
+      username: escapedUsername,
+      token,
+    }
+  }
+
+  private async _parse(): Promise<HtpasswdEntry[]> {
+    if (!(await this._exists())) {
       return []
     }
 
@@ -45,76 +107,15 @@ class HtpasswdFile {
     return entries
   }
 
-  private async exists(): Promise<boolean> {
+  private async _exists(): Promise<boolean> {
     try {
-      return !!(await lstat(this.path))
+      return (await lstat(this.path)).isFile()
     } catch {
       return false
     }
   }
 
-  public async has(username: string): Promise<boolean> {
-    const escapedUsername = HtpasswdFile.escapeUsername(username)
-    const entries = await this.parse()
-    return entries.some(
-      (entry) => 'username' in entry && entry.username === escapedUsername
-    )
-  }
-
-  private static async hashToken(token: string): Promise<string> {
-    const salt = await genSalt(5)
-
-    return await hash(token, salt)
-  }
-
-  private static async issueToken(): Promise<{
-    token: string
-    hashedToken: string
-  }> {
-    const token = nanoid(64)
-    const hashedToken = await HtpasswdFile.hashToken(token)
-
-    return {
-      token,
-      hashedToken,
-    }
-  }
-
-  // @ は URI エンコードが必要なので避ける
-  private static escapeUsername(username: string): string {
-    return username.replace('@', '.')
-  }
-
-  public async append(
-    username: string
-  ): Promise<{ username: string; token: string }> {
-    const { token, hashedToken } = await HtpasswdFile.issueToken()
-
-    const escapedUsername = HtpasswdFile.escapeUsername(username)
-    const entry = {
-      username: escapedUsername,
-      token: hashedToken,
-    }
-
-    const entries = await this.parse()
-    const index = entries.findIndex(
-      (entry) => 'username' in entry && entry.username === escapedUsername
-    )
-    if (index >= 0) {
-      entries[index] = entry
-    } else {
-      entries.push(entry)
-    }
-
-    await this.write(entries)
-
-    return {
-      username: escapedUsername,
-      token,
-    }
-  }
-
-  private async write(entries: HtpasswdEntry[]): Promise<void> {
+  private async _write(entries: HtpasswdEntry[]): Promise<void> {
     const content = entries
       .map((entry) => {
         if ('username' in entry) {
@@ -130,15 +131,16 @@ class HtpasswdFile {
   }
 }
 
-const EPGSTATION_HTPASSWD_PATH = process.env.EPGSTATION_HTPASSWD_PATH
-if (!EPGSTATION_HTPASSWD_PATH) {
-  throw new Error('EPGSTATION_HTPASSWD_PATH is not defined')
-}
+const schema = z.object({
+  MIRAKURUN_HTPASSWD_PATH: z.string(),
+  EPGSTATION_HTPASSWD_PATH: z.string(),
+})
 
-const MIRAKURUN_HTPASSWD_PATH = process.env.MIRAKURUN_HTPASSWD_PATH
-if (!MIRAKURUN_HTPASSWD_PATH) {
-  throw new Error('MIRAKURUN_HTPASSWD_PATH is not defined')
-}
+const env = schema.parse({
+  MIRAKURUN_HTPASSWD_PATH: process.env.MIRAKURUN_HTPASSWD_PATH,
+  EPGSTATION_HTPASSWD_PATH: process.env.EPGSTATION_HTPASSWD_PATH,
+})
 
-export const EPGStationHtpasswd = new HtpasswdFile(EPGSTATION_HTPASSWD_PATH)
-export const MirakurunHtpasswd = new HtpasswdFile(MIRAKURUN_HTPASSWD_PATH)
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const EPGStationHtpasswd = new HtpasswdFile(env.EPGSTATION_HTPASSWD_PATH)
+export const MirakurunHtpasswd = new HtpasswdFile(env.MIRAKURUN_HTPASSWD_PATH)

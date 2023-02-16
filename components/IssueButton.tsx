@@ -77,7 +77,7 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
   }
 
   const handleClipboardClick = (value?: string) => {
-    if (!value) {
+    if (value === undefined) {
       return
     }
 
@@ -89,7 +89,7 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
     })
   }
 
-  if (!status?.success || isError) {
+  if (status?.success !== true || isError) {
     return <></>
   }
 
@@ -144,7 +144,9 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
       <Modal
         centered
         opened={!!issue && isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false)
+        }}
         size="xl"
       >
         <Title>{service.name}</Title>
@@ -167,7 +169,9 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
             <Tooltip label="ユーザー名をコピー" position="right">
               <ActionIcon
                 style={{ display: 'inline' }}
-                onClick={() => handleClipboardClick(issue?.username)}
+                onClick={() => {
+                  handleClipboardClick(issue?.username)
+                }}
               >
                 <ClipboardText size={18} />
               </ActionIcon>
@@ -179,7 +183,9 @@ export const IssueButton: React.FC<{ service: Service }> = ({ service }) => {
             <Tooltip label="パスワードをコピー" position="right">
               <ActionIcon
                 style={{ display: 'inline' }}
-                onClick={() => handleClipboardClick(issue?.token)}
+                onClick={() => {
+                  handleClipboardClick(issue?.token)
+                }}
               >
                 <ClipboardText size={18} />
               </ActionIcon>

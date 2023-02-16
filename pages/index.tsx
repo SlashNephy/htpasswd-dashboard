@@ -33,7 +33,7 @@ const Home: NextPage = () => {
     fetch(`${nextConfigJs.basePath}/api/hello`).then(async (res) => res.json())
   )
 
-  if (!hello || !hello.success) {
+  if (hello === undefined || !hello.success) {
     return null
   }
 
@@ -57,7 +57,9 @@ const Home: NextPage = () => {
               <ActionIcon
                 variant="outline"
                 color={colorScheme === 'dark' ? 'yellow' : 'blue'}
-                onClick={() => toggleColorScheme()}
+                onClick={() => {
+                  toggleColorScheme()
+                }}
                 title="Toggle color scheme"
               >
                 {colorScheme === 'dark' ? (
@@ -102,9 +104,9 @@ const Home: NextPage = () => {
           <Space p={10} />
           <Alert
             color="green"
-            icon={<Avatar src={gravatar.url(hello?.email)} size={30} />}
+            icon={<Avatar src={gravatar.url(hello.email)} size={30} />}
           >
-            {hello?.email} としてログイン中です。
+            {hello.email} としてログイン中です。
           </Alert>
 
           <Space h={200} />

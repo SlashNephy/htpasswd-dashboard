@@ -1,19 +1,19 @@
 {
   "name": "atmos-token-distributor",
   "version": "0.1.0",
-  "private": true,
   "repository": "https://github.com/StarryBlueSky/atmos-token-distributor",
+  "private": true,
   "scripts": {
-    "start": "next start",
-    "dev": "next dev",
     "build": "next build",
-    "lint": "concurrently -n lint: 'yarn:lint:*'",
-    "lint:eslint": "next lint",
-    "lint:prettier": "prettier --check .",
-    "hadolint": "hadolint Dockerfile",
+    "dev": "next dev",
     "format": "concurrently -n format: 'yarn:format:*'",
     "format:eslint": "yarn lint:eslint --fix",
-    "format:prettier": "yarn lint:prettier --write"
+    "format:prettier": "yarn lint:prettier --write",
+    "hadolint": "hadolint Dockerfile",
+    "lint": "concurrently -n lint: 'yarn:lint:*'",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier --check .",
+    "start": "next start"
   },
   "dependencies": {
     "@mantine/core": "4.2.12",
@@ -32,7 +32,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "3.39.2",
-    "tabler-icons-react": "1.55.0"
+    "tabler-icons-react": "1.55.0",
+    "zod": "3.20.6"
   },
   "devDependencies": {
     "@slashnephy/eslint-config": "0.2.43",

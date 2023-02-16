@@ -4,7 +4,7 @@ import { EPGStationHtpasswd, MirakurunHtpasswd } from '../../../lib/htpasswd'
 import { validateJwtPayload } from '../hello'
 
 import type { ApiResponse } from '../type'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 
 export type StatusResponse = ApiResponse<{
   found: boolean
@@ -17,13 +17,14 @@ export type IssueResponse = ApiResponse<{
 
 const mutex = new Mutex()
 
-const handler = async (
+const handler: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<StatusResponse | IssueResponse>
 ) => {
   const { slug } = req.query
   if (!Array.isArray(slug) || slug.length !== 2) {
-    return res.status(404)
+    res.status(404)
+    return
   }
 
   const [service, request] = slug
@@ -33,46 +34,53 @@ const handler = async (
     switch (request) {
       case 'status':
         switch (service) {
-          case 'epgstation':
-            return res.status(200).json({
+          case 'epgstation': {
+            res.status(200).json({
               success: true,
               found: await EPGStationHtpasswd.has(payload.email),
             })
-          case 'mirakurun':
-            return res.status(200).json({
+            return
+          }
+          case 'mirakurun': {
+            res.status(200).json({
               success: true,
               found: await MirakurunHtpasswd.has(payload.email),
             })
+            return
+          }
         }
         break
       case 'issue':
         if (req.method !== 'PUT') {
-          return res.status(405).json({
+          res.status(405).json({
             success: false,
             error: 'Method Not Allowed',
           })
+          return
         }
 
         // 書き込みオペレーションを同時に処理できないようにする
         await mutex.runExclusive(async () => {
           switch (service) {
             case 'epgstation':
-              return res.status(200).json({
+              res.status(200).json({
                 success: true,
                 ...(await EPGStationHtpasswd.append(payload.email)),
               })
+              break
             case 'mirakurun':
-              return res.status(200).json({
+              res.status(200).json({
                 success: true,
                 ...(await MirakurunHtpasswd.append(payload.email)),
               })
+              break
           }
         })
         break
     }
 
     res.status(404)
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error)
     res.status(403).json({ success: false, error: `${error}` })
   }

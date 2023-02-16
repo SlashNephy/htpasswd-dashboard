@@ -2,6 +2,7 @@ import { useLocalStorage } from '@mantine/hooks'
 
 import type { ColorScheme } from '@mantine/core'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useMemorableColorScheme = () => {
   const [isDark, setIsDark] = useLocalStorage<boolean>({
     key: 'is-dark-color-scheme',
@@ -17,7 +18,7 @@ export const useMemorableColorScheme = () => {
         setIsDark(true)
         break
       default:
-        setIsDark((previous) => !previous)
+        setIsDark((wasDark) => !wasDark)
     }
   }
 

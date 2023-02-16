@@ -1,65 +1,49 @@
 import { verify } from 'jsonwebtoken'
 import { JwksClient } from 'jwks-rsa'
+import { z } from 'zod'
 
 import type { GetPublicKeyOrSecret, JwtPayload } from 'jsonwebtoken'
-import type { CertSigningKey, RsaSigningKey } from 'jwks-rsa'
 
-const getCertsUrl = (): string => {
-  const domain = process.env.CF_TEAM_DOMAIN
-  if (!domain) {
-    throw new Error('CF_TEAM_DOMAIN is not set')
-  }
+const schema = z.object({
+  CF_TEAM_DOMAIN: z.string(),
+  CF_APP_AUDIENCE: z.string(),
+})
 
-  return `https://${domain}/cdn-cgi/access/certs`
-}
+const env = schema.parse({
+  CF_TEAM_DOMAIN: process.env.CF_TEAM_DOMAIN,
+  CF_APP_AUDIENCE: process.env.CF_APP_AUDIENCE,
+})
 
 const client = new JwksClient({
-  jwksUri: getCertsUrl(),
+  jwksUri: `https://${env.CF_TEAM_DOMAIN}/cdn-cgi/access/certs`,
   cacheMaxAge: 3600,
 })
 
 const getKey: GetPublicKeyOrSecret = (header, callback) => {
   client.getSigningKey(header.kid, (error, key) => {
-    const certKey = key as CertSigningKey
-    const rsaKey = key as RsaSigningKey
-    const signingKey = certKey?.publicKey || rsaKey?.rsaPublicKey
+    const signingKey = key?.getPublicKey()
     callback(null, signingKey)
   })
 }
 
-const getAudience = (): string => {
-  const audience = process.env.CF_APP_AUDIENCE
-  if (!audience) {
-    throw new Error('CF_APP_AUDIENCE is not set')
-  }
-
-  return audience
-}
-
 export const validateJwt = async (token: string): Promise<CloudflareJwt> => {
-  const audience = getAudience()
-
-  return {
-    then: (resolve, reject) => {
-      verify(
-        token,
-        getKey,
-        {
-          audience,
-          algorithms: ['RS256'],
-        },
-        (error, decoded) => {
-          if (resolve && decoded) {
-            void resolve(decoded as CloudflareJwt)
-          }
-
-          if (reject && error) {
-            void reject(error)
-          }
+  return new Promise((resolve, reject) => {
+    verify(
+      token,
+      getKey,
+      {
+        audience: env.CF_APP_AUDIENCE,
+        algorithms: ['RS256'],
+      },
+      (error, decoded) => {
+        if (decoded !== undefined && typeof decoded !== 'string') {
+          resolve(decoded as CloudflareJwt)
+        } else {
+          reject(error)
         }
-      )
-    },
-  }
+      }
+    )
+  })
 }
 
 export type CloudflareJwt = JwtPayload & {

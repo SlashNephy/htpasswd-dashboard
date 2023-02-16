@@ -1,14 +1,13 @@
-import { isDebug } from '../../lib/isDebug'
 import { validateJwt } from '../../lib/jwt'
 
-import type { CloudflareJwt } from '../../lib/jwt'
 import type { ApiResponse } from './type'
+import type { CloudflareJwt } from '../../lib/jwt'
 import type { IncomingHttpHeaders } from 'http'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 
 export type HelloResponse = ApiResponse<CloudflareJwt>
 
-const handler = async (
+const handler: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<HelloResponse>
 ) => {
@@ -19,7 +18,7 @@ const handler = async (
       success: true,
       ...payload,
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error)
 
     res.status(403).json({
@@ -33,7 +32,7 @@ export const validateJwtPayload = async (
   headers: IncomingHttpHeaders
 ): Promise<CloudflareJwt> => {
   const token = extractJwt(headers)
-  if (!token) {
+  if (token === undefined) {
     throw new Error('No token provided.')
   }
 
@@ -41,13 +40,13 @@ export const validateJwtPayload = async (
 }
 
 const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {
-  if (isDebug) {
+  if (process.env.NODE_ENV !== 'production') {
     return process.env.CF_JWT
   }
 
   const value = headers['cf-access-jwt-assertion']
-  if (typeof value !== 'string') {
-    return undefined
+  if (Array.isArray(value)) {
+    return value[0]
   }
 
   return value
