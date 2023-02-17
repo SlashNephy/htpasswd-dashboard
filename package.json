@@ -16,10 +16,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@mantine/core": "4.2.12",
-    "@mantine/hooks": "4.2.12",
-    "@mantine/next": "4.2.12",
-    "@mantine/notifications": "4.2.12",
+    "@mantine/core": "5.10.3",
+    "@mantine/hooks": "5.10.3",
+    "@mantine/next": "5.10.3",
+    "@mantine/notifications": "5.10.3",
     "async-mutex": "0.4.0",
     "bcrypt": "5.1.0",
     "gravatar": "1.8.2",
