@@ -85,7 +85,7 @@ export const GeneratePasswordButton: React.FC<{
         title="エラーが発生しました"
         color="red"
       >
-        パスワード生成履歴できませんでした。
+        パスワード生成履歴を取得できませんでした。
       </Alert>
     )
   }
