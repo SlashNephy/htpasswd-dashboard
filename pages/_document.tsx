@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
   // noinspection HtmlRequiredTitleElement
   public render = (): React.ReactElement => (
-    <Html lang="en">
+    <Html lang="ja">
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>

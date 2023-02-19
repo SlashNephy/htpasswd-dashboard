@@ -1,18 +1,13 @@
 import { verify } from 'jsonwebtoken'
 import { JwksClient } from 'jwks-rsa'
-import { z } from 'zod'
+
+import { env } from './config'
 
 import type { GetPublicKeyOrSecret, JwtPayload } from 'jsonwebtoken'
 
-const schema = z.object({
-  CF_TEAM_DOMAIN: z.string(),
-  CF_APP_AUDIENCE: z.string(),
-})
-
-const env = schema.parse({
-  CF_TEAM_DOMAIN: process.env.CF_TEAM_DOMAIN,
-  CF_APP_AUDIENCE: process.env.CF_APP_AUDIENCE,
-})
+export type CloudflareJwt = JwtPayload & {
+  email: string
+}
 
 const client = new JwksClient({
   jwksUri: `https://${env.CF_TEAM_DOMAIN}/cdn-cgi/access/certs`,
@@ -26,7 +21,9 @@ const getKey: GetPublicKeyOrSecret = (header, callback) => {
   })
 }
 
-export const validateJwt = async (token: string): Promise<CloudflareJwt> => {
+export const validateCloudflareJwt = async (
+  token: string
+): Promise<CloudflareJwt> => {
   return new Promise((resolve, reject) => {
     verify(
       token,
@@ -44,17 +41,4 @@ export const validateJwt = async (token: string): Promise<CloudflareJwt> => {
       }
     )
   })
-}
-
-export type CloudflareJwt = JwtPayload & {
-  aud: string[]
-  email: string
-  exp: number
-  iat: number
-  nbf: number
-  iss: string
-  type: string
-  identity_nonce: string
-  sub: string
-  country: string
 }

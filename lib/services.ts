@@ -1,6 +1,5 @@
-import nextConfigJs from '../next.config'
-
 export type Service = {
+  key: string
   name: string
   url: string
   imageUrl: string
@@ -10,17 +9,19 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    name: 'EPGStation',
-    url: 'https://atmos.starry.blue',
-    imageUrl: `${nextConfigJs.basePath}/epgstation.jpeg`,
-    apiUrl: 'https://anemos.starry.blue/api',
-    exampleApiUrl: 'https://anemos.starry.blue/api/version',
+    key: 'mirakurun',
+    name: 'Mirakurun',
+    url: 'https://mirakurun.starry.blue',
+    imageUrl: '/mirakurun.webp',
+    apiUrl: 'https://mirakurun-api.starry.blue/api',
+    exampleApiUrl: 'https://mirakurun-api.starry.blue/api/status',
   },
   {
-    name: 'Mirakurun',
-    url: 'https://apps.starry.blue/mirakurun',
-    imageUrl: `${nextConfigJs.basePath}/mirakurun.webp`,
-    apiUrl: 'https://atmos.starry.blue/mirakurun',
-    exampleApiUrl: 'https://atmos.starry.blue/mirakurun/status',
+    key: 'epgstation',
+    name: 'EPGStation',
+    url: 'https://epgstation.starry.blue',
+    imageUrl: '/epgstation.jpeg',
+    apiUrl: 'https://epgstation-api.starry.blue/api',
+    exampleApiUrl: 'https://epgstation-api.starry.blue/api/version',
   },
 ]

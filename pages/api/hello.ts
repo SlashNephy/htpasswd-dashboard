@@ -1,47 +1,44 @@
-import { validateJwt } from '../../lib/jwt'
+import { StatusCodes } from 'http-status-codes'
 
-import type { ApiResponse } from './type'
+import { env } from '../../lib/config'
+import { validateCloudflareJwt } from '../../lib/jwt'
+
+import type { HelloResponse } from '../../lib/api'
 import type { CloudflareJwt } from '../../lib/jwt'
 import type { IncomingHttpHeaders } from 'http'
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiHandler } from 'next'
 
-export type HelloResponse = ApiResponse<CloudflareJwt>
-
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<HelloResponse>
-) => {
+const handler: NextApiHandler<HelloResponse> = async (req, res) => {
   try {
-    const payload = await validateJwtPayload(req.headers)
+    const payload = await validateJwt(req.headers)
 
-    res.status(200).json({
+    res.status(StatusCodes.OK).json({
       success: true,
       ...payload,
     })
   } catch (error: unknown) {
     console.error(error)
 
-    res.status(403).json({
+    res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
-      error: `${error}`,
     })
   }
 }
 
-export const validateJwtPayload = async (
+export const validateJwt = async (
   headers: IncomingHttpHeaders
 ): Promise<CloudflareJwt> => {
-  const token = extractJwt(headers)
-  if (token === undefined) {
-    throw new Error('No token provided.')
+  const jwt = extractJwt(headers)
+  if (jwt === undefined) {
+    throw new Error('No JWT provided')
   }
 
-  return await validateJwt(token)
+  return await validateCloudflareJwt(jwt)
 }
 
 const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {
-  if (process.env.NODE_ENV !== 'production') {
-    return process.env.CF_JWT
+  if (env.NODE_ENV === 'development') {
+    return env.CF_JWT
   }
 
   const value = headers['cf-access-jwt-assertion']

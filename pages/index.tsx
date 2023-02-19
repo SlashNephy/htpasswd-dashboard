@@ -1,127 +1,82 @@
 import {
-  ActionIcon,
   Alert,
-  Anchor,
-  AppShell,
   Avatar,
-  Container,
-  Footer,
+  Center,
   Grid,
   Group,
-  Header,
+  Loader,
   Space,
   Text,
-  Title,
-  useMantineColorScheme,
 } from '@mantine/core'
+import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react'
 import gravatar from 'gravatar'
-import Head from 'next/head'
+import React from 'react'
 import { useQuery } from 'react-query'
-import { Heart, InfoCircle, MoonStars, Package, Sun } from 'tabler-icons-react'
 
-import { IssueButton } from '../components/IssueButton'
+import { AppLayout } from '../components/AppLayout'
+import { ServiceCard } from '../components/ServiceCard'
+import { fetcher } from '../lib/fetcher'
 import { services } from '../lib/services'
-import nextConfigJs from '../next.config.js'
 import packageJson from '../package.json'
 
-import type { HelloResponse } from './api/hello'
+import type { HelloResponse } from '../lib/api'
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
-  const { data: hello } = useQuery<HelloResponse>('hello', async () =>
-    fetch(`${nextConfigJs.basePath}/api/hello`).then(async (res) => res.json())
-  )
-
-  if (hello === undefined || !hello.success) {
-    return null
-  }
+const Index: NextPage = () => {
+  const {
+    data: hello,
+    isLoading,
+    isError,
+  } = useQuery('hello', async () => fetcher<HelloResponse>('/api/hello'))
 
   return (
-    <>
-      <Head>
-        <title>{packageJson.name}</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
+    <AppLayout>
+      <Alert color="cyan" icon={<IconInfoCircle />}>
+        {packageJson.name} では、各種サービスへのアクセスに使用する Basic{' '}
+        認証の資格情報を発行することができます。
+        <br />
+        サービスごとに1つのパスワードを発行可能です。
+        <br />
+        発行されたパスワードには有効期限はありません。
+      </Alert>
 
-      <AppShell
-        header={
-          <Header height={80} p="md">
-            <Group style={{ justifyContent: 'center' }}>
-              <Package size={40} />
-              <Title>{packageJson.name}</Title>
-              <ActionIcon
-                variant="outline"
-                color={colorScheme === 'dark' ? 'yellow' : 'blue'}
-                onClick={() => {
-                  toggleColorScheme()
-                }}
-                title="Toggle color scheme"
-              >
-                {colorScheme === 'dark' ? (
-                  <Sun size={18} />
-                ) : (
-                  <MoonStars size={18} />
-                )}
-              </ActionIcon>
-            </Group>
-          </Header>
-        }
-        footer={
-          <Footer
-            height={60}
-            p="md"
-            fixed
-            position={{ bottom: 0 }}
-            style={{
-              width: '100%',
-            }}
-          >
-            <Text size="sm" style={{ textAlign: 'center' }}>
-              <Anchor size="sm" href={packageJson.repository} target="_blank">
-                {packageJson.name}
-              </Anchor>
-              &nbsp;made with{' '}
-              <Heart size={16} strokeWidth={2} color="#d27979" />. Built with
-              Next.js & Mantine.
-            </Text>
-          </Footer>
-        }
-      >
-        <Container>
-          <Alert color="cyan" icon={<InfoCircle />}>
-            {packageJson.name} では、各種サービスへのアクセスに使用する Basic
-            認証の資格情報を発行することができます。
-            <br />
-            サービスごとに1つのアクセストークンを発行可能です。
-            <br />
-            発行されたアクセストークンには有効期限はありません。
-          </Alert>
-          <Space p={10} />
-          <Alert
-            color="green"
-            icon={<Avatar src={gravatar.url(hello.email)} size={30} />}
-          >
-            {hello.email} としてログイン中です。
-          </Alert>
+      <Space p={10} />
 
-          <Space h={200} />
+      {isLoading ? (
+        <Center>
+          <Group>
+            <Loader variant="dots" />
+            <Text>ユーザーを確認しています...</Text>
+          </Group>
+        </Center>
+      ) : isError || hello?.success !== true ? (
+        <Alert
+          icon={<IconAlertTriangle size={16} />}
+          title="エラーが発生しました"
+          color="red"
+        >
+          ユーザーを確認できませんでした。
+        </Alert>
+      ) : (
+        <Alert
+          color="green"
+          icon={<Avatar src={gravatar.url(hello.email)} size={30} />}
+        >
+          {hello.email} としてログインしています。
+        </Alert>
+      )}
 
-          <Grid justify="center">
-            <Group>
-              {services.map((service) => (
-                <IssueButton key={service.name} service={service} />
-              ))}
-            </Group>
-          </Grid>
-        </Container>
-      </AppShell>
-    </>
+      <Space h={200} />
+
+      <Grid justify="center">
+        {services.map((service) => (
+          <Grid.Col key={service.key} span={6}>
+            <ServiceCard service={service} shadow="md" p="lg" m="lg" />
+          </Grid.Col>
+        ))}
+      </Grid>
+    </AppLayout>
   )
 }
 
-export default Home
+export default Index
