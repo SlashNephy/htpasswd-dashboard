@@ -9,7 +9,7 @@ import type { Service } from '../lib/services'
 import type { CardProps } from '@mantine/core'
 
 export const ServiceCard: React.FC<
-  Omit<CardProps<'div'>, 'children'> & { service: Service }
+  Omit<CardProps, 'children'> & { service: Service }
 > = ({ service, ...props }) => {
   const theme = useMantineTheme()
   const [credential, setCredential] = useState<Credential>()
