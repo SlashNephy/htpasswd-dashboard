@@ -39,7 +39,6 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
       })
     } else {
       await this.api.patchSecret(this.name, this.namespace, {
-        ...secret,
         [escapedUsername]: encodedPassword,
       })
     }
@@ -99,8 +98,22 @@ class KubernetesApiClient {
     namespace: string,
     data: Record<string, string>
   ) {
-    await this.api.patchNamespacedSecret(name, namespace, {
-      data,
-    })
+    await this.api.patchNamespacedSecret(
+      name,
+      namespace,
+      {
+        data,
+      },
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      {
+        headers: {
+          'Content-Type': 'application/merge-patch+json',
+        },
+      }
+    )
   }
 }
