@@ -18,7 +18,7 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
 
   public async has(username: string): Promise<boolean> {
     const secret = await this.api.getSecret(this.name, this.namespace)
-    if (secret?.data === undefined) {
+    if (secret === undefined) {
       return false
     }
 
