@@ -1,13 +1,14 @@
 import { CoreV1Api, HttpError, KubeConfig } from '@kubernetes/client-node'
 
-import {
-  encodeBase64,
-  escapeUsername,
-  generateHash,
-  generatePassword,
-} from './bcrypt'
+import { decodeBase64, encodeBase64 } from './base64'
+import { decodeHtpasswd, encodeHtpasswd, escapeUsername } from './htpasswd'
+import { generateHash, generatePassword } from './password'
 
 import type { Credential, HtpasswdBackend } from './index'
+
+type TraefikBasicAuthSecret = {
+  users?: string
+}
 
 export class KubernetesSecretBackend implements HtpasswdBackend {
   private readonly api: KubernetesApiClient
@@ -17,30 +18,72 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
   }
 
   public async has(username: string): Promise<boolean> {
-    const secret = await this.api.getSecret(this.name, this.namespace)
-    if (secret === undefined) {
+    const secret = await this.api.getSecret<TraefikBasicAuthSecret>(
+      this.name,
+      this.namespace
+    )
+    if (secret?.users === undefined) {
       return false
     }
 
     const escapedUsername = escapeUsername(username)
-    return escapedUsername in secret
+
+    const users = decodeBase64(secret.users)
+    const entries = decodeHtpasswd(users)
+    return entries.some(
+      (entry) => 'username' in entry && entry.username === escapedUsername
+    )
   }
 
   public async append(username: string): Promise<Credential> {
     const password = generatePassword()
     const hashedPassword = await generateHash(password)
-    const encodedPassword = encodeBase64(hashedPassword)
     const escapedUsername = escapeUsername(username)
 
-    const secret = await this.api.getSecret(this.name, this.namespace)
-    if (secret === undefined) {
-      await this.api.createSecret(this.name, this.namespace, {
-        [escapedUsername]: encodedPassword,
-      })
+    const secret = await this.api.getSecret<TraefikBasicAuthSecret>(
+      this.name,
+      this.namespace
+    )
+    if (secret?.users === undefined) {
+      await this.api.createSecret<TraefikBasicAuthSecret>(
+        this.name,
+        this.namespace,
+        {
+          users: encodeBase64(
+            encodeHtpasswd([
+              {
+                username: escapedUsername,
+                hashedPassword,
+              },
+            ])
+          ),
+        }
+      )
     } else {
-      await this.api.patchSecret(this.name, this.namespace, {
-        [escapedUsername]: encodedPassword,
-      })
+      const users = decodeBase64(secret.users)
+      const entries = decodeHtpasswd(users)
+      const index = entries.findIndex(
+        (entry) => 'username' in entry && entry.username === escapedUsername
+      )
+      if (index < 0) {
+        entries.push({
+          username: escapedUsername,
+          hashedPassword,
+        })
+      } else {
+        entries[index] = {
+          username: escapedUsername,
+          hashedPassword,
+        }
+      }
+
+      await this.api.patchSecret<TraefikBasicAuthSecret>(
+        this.name,
+        this.namespace,
+        {
+          users: encodeBase64(encodeHtpasswd(entries)),
+        }
+      )
     }
 
     return {
@@ -60,14 +103,14 @@ class KubernetesApiClient {
     this.api = config.makeApiClient(CoreV1Api)
   }
 
-  public async getSecret(
+  public async getSecret<T extends Record<string, string>>(
     name: string,
     namespace: string
-  ): Promise<Record<string, string> | undefined> {
+  ): Promise<T | undefined> {
     try {
       const { body } = await this.api.readNamespacedSecret(name, namespace)
 
-      return body.data
+      return body.data as T | undefined
     } catch (e: unknown) {
       if (e instanceof HttpError && e.statusCode === 404) {
         return
@@ -77,10 +120,10 @@ class KubernetesApiClient {
     }
   }
 
-  public async createSecret(
+  public async createSecret<T extends Record<string, string>>(
     name: string,
     namespace: string,
-    data: Record<string, string>
+    data: T
   ) {
     await this.api.createNamespacedSecret(namespace, {
       apiVersion: 'v1',
@@ -93,10 +136,10 @@ class KubernetesApiClient {
     })
   }
 
-  public async patchSecret(
+  public async patchSecret<T extends Record<string, string>>(
     name: string,
     namespace: string,
-    data: Record<string, string>
+    data: T
   ) {
     await this.api.patchNamespacedSecret(
       name,

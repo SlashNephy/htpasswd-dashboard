@@ -1,19 +1,21 @@
 import { readFile, lstat, writeFile } from 'fs/promises'
 
-import { escapeUsername, generateHash, generatePassword } from './bcrypt'
+import { decodeHtpasswd, encodeHtpasswd, escapeUsername } from './htpasswd'
+import { generateHash, generatePassword } from './password'
 
+import type { HtpasswdEntry } from './htpasswd'
 import type { Credential, HtpasswdBackend } from './index'
 
 export class HtpasswdFileBackend implements HtpasswdBackend {
-  private readonly writer: HtpasswdWriter
+  private readonly file: HtpasswdFile
 
   public constructor(path: string) {
-    this.writer = new HtpasswdWriter(path)
+    this.file = new HtpasswdFile(path)
   }
 
   public async has(username: string): Promise<boolean> {
     const escapedUsername = escapeUsername(username)
-    const entries = await this.writer.read()
+    const entries = await this.file.read()
     return entries.some(
       (entry) => 'username' in entry && entry.username === escapedUsername
     )
@@ -24,23 +26,23 @@ export class HtpasswdFileBackend implements HtpasswdBackend {
     const hashedPassword = await generateHash(password)
     const escapedUsername = escapeUsername(username)
 
-    const entries = await this.writer.read()
+    const entries = await this.file.read()
     const index = entries.findIndex(
       (entry) => 'username' in entry && entry.username === escapedUsername
     )
     if (index >= 0) {
       entries[index] = {
         username: escapedUsername,
-        token: hashedPassword,
+        hashedPassword,
       }
     } else {
       entries.push({
         username: escapedUsername,
-        token: hashedPassword,
+        hashedPassword,
       })
     }
 
-    await this.writer.write(entries)
+    await this.file.write(entries)
 
     return {
       username: escapedUsername,
@@ -49,16 +51,7 @@ export class HtpasswdFileBackend implements HtpasswdBackend {
   }
 }
 
-type HtpasswdEntry =
-  | {
-      username: string
-      token: string
-    }
-  | {
-      comment: string
-    }
-
-class HtpasswdWriter {
+class HtpasswdFile {
   public constructor(public readonly path: string) {}
 
   public async exists(): Promise<boolean> {
@@ -75,38 +68,11 @@ class HtpasswdWriter {
     }
 
     const content = await readFile(this.path, 'utf8')
-
-    const entries: HtpasswdEntry[] = []
-    for (const line of content.split('\n')) {
-      if (line.startsWith('#') || !line.includes(':')) {
-        entries.push({
-          comment: line,
-        })
-        continue
-      }
-
-      const [username, token] = line.split(':')
-      entries.push({
-        username,
-        token,
-      })
-    }
-
-    return entries
+    return decodeHtpasswd(content)
   }
 
   public async write(entries: HtpasswdEntry[]): Promise<void> {
-    const content = entries
-      .map((entry) => {
-        if ('username' in entry) {
-          return `${entry.username}:${entry.token}`
-        } else {
-          return entry.comment
-        }
-      })
-      .join('\n')
-      .trim()
-
+    const content = encodeHtpasswd(entries)
     await writeFile(this.path, `${content}\n`)
   }
 }
