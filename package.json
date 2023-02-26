@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@slashnephy/eslint-config": "0.2.43",
-    "@slashnephy/prettier-config": "0.1.14",
+    "@slashnephy/prettier-config": "0.1.15",
     "@types/bcrypt": "5.0.0",
     "@types/gravatar": "1.8.3",
     "@types/jsonwebtoken": "9.0.1",
