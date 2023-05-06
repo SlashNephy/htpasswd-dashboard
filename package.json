@@ -18,8 +18,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "11.10.8",
-    "@emotion/server": "11.10.0",
+    "@emotion/react": "11.11.0",
+    "@emotion/server": "11.11.0",
     "@kubernetes/client-node": "0.18.1",
     "@mantine/core": "5.10.5",
     "@mantine/hooks": "5.10.5",
