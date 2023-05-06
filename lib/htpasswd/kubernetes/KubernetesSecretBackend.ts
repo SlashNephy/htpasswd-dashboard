@@ -4,6 +4,7 @@ import { decodeHtpasswd, encodeHtpasswd, escapeUsername } from '../htpasswd'
 import { generateHash, generatePassword } from '../password'
 
 import type { Credential, HtpasswdBackend } from '../backend'
+import type { HtpasswdEntry } from '../htpasswd'
 
 type TraefikBasicAuthSecret = {
   users?: string
@@ -17,7 +18,7 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
   }
 
   public async has(username: string): Promise<boolean> {
-    const secret = await this.api.getSecret<TraefikBasicAuthSecret>(
+    const { secret } = await this.api.getSecret<TraefikBasicAuthSecret>(
       this.name,
       this.namespace
     )
@@ -39,11 +40,12 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
     const hashedPassword = await generateHash(password)
     const escapedUsername = escapeUsername(username)
 
-    const secret = await this.api.getSecret<TraefikBasicAuthSecret>(
-      this.name,
-      this.namespace
-    )
-    if (secret?.users === undefined) {
+    const { secret, isExisting } =
+      await this.api.getSecret<TraefikBasicAuthSecret>(
+        this.name,
+        this.namespace
+      )
+    if (!isExisting) {
       await this.api.createSecret<TraefikBasicAuthSecret>(
         this.name,
         this.namespace,
@@ -59,8 +61,12 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
         }
       )
     } else {
-      const users = decodeBase64(secret.users)
-      const entries = decodeHtpasswd(users)
+      const entries: HtpasswdEntry[] = []
+      if (secret?.users !== undefined) {
+        const users = decodeBase64(secret.users)
+        entries.push(...decodeHtpasswd(users))
+      }
+
       const index = entries.findIndex(
         (entry) => 'username' in entry && entry.username === escapedUsername
       )

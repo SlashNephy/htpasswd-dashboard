@@ -1,5 +1,10 @@
 import { CoreV1Api, HttpError, KubeConfig } from '@kubernetes/client-node'
 
+export type SecretResult<T extends Record<string, string>> = {
+  secret: T | undefined
+  isExisting: boolean
+}
+
 export class KubernetesApiClient {
   private readonly api: CoreV1Api
 
@@ -13,14 +18,20 @@ export class KubernetesApiClient {
   public async getSecret<T extends Record<string, string>>(
     name: string,
     namespace: string
-  ): Promise<T | undefined> {
+  ): Promise<SecretResult<T>> {
     try {
       const { body } = await this.api.readNamespacedSecret(name, namespace)
 
-      return body.data as T | undefined
+      return {
+        secret: body.data as T | undefined,
+        isExisting: true,
+      }
     } catch (e: unknown) {
       if (e instanceof HttpError && e.statusCode === 404) {
-        return
+        return {
+          secret: undefined,
+          isExisting: false,
+        }
       }
 
       throw e
@@ -31,7 +42,7 @@ export class KubernetesApiClient {
     name: string,
     namespace: string,
     data: T
-  ) {
+  ): Promise<void> {
     await this.api.createNamespacedSecret(namespace, {
       apiVersion: 'v1',
       kind: 'Secret',
@@ -47,7 +58,7 @@ export class KubernetesApiClient {
     name: string,
     namespace: string,
     data: T
-  ) {
+  ): Promise<void> {
     await this.api.patchNamespacedSecret(
       name,
       namespace,
