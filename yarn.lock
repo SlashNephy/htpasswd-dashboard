@@ -1922,52 +1922,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"atmos-token-distributor@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "atmos-token-distributor@workspace:."
-  dependencies:
-    "@emotion/react": 11.10.8
-    "@emotion/server": 11.10.0
-    "@kubernetes/client-node": 0.18.1
-    "@mantine/core": 5.10.4
-    "@mantine/hooks": 5.10.4
-    "@mantine/next": 5.10.4
-    "@mantine/notifications": 5.10.4
-    "@slashnephy/eslint-config": 0.4.22
-    "@slashnephy/prettier-config": 0.1.16
-    "@tabler/icons-react": 2.17.0
-    "@types/bcrypt": 5.0.0
-    "@types/gravatar": 1.8.3
-    "@types/jsonwebtoken": 9.0.2
-    "@types/node": 18.16.5
-    "@types/react": 18.2.5
-    "@types/react-dom": 18.2.4
-    "@typescript-eslint/eslint-plugin": 5.59.2
-    "@typescript-eslint/parser": 5.59.2
-    async-mutex: 0.4.0
-    bcrypt: 5.1.0
-    concurrently: 8.0.1
-    eslint: 8.40.0
-    eslint-plugin-deprecation: 1.4.1
-    eslint-plugin-import: 2.27.5
-    eslint-plugin-jest: 27.2.1
-    eslint-plugin-unused-imports: 2.0.0
-    gravatar: 1.8.2
-    http-status-codes: 2.2.0
-    jsonwebtoken: 9.0.0
-    jwks-rsa: 3.0.1
-    nanoid: 4.0.2
-    next: 13.3.4
-    prettier: 2.8.8
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-query: 3.39.3
-    ts-array-length: 0.1.2
-    typescript: 5.0.4
-    zod: 3.21.4
-  languageName: unknown
-  linkType: soft
-
 "available-typed-arrays@npm:^1.0.5":
   version: 1.0.5
   resolution: "available-typed-arrays@npm:1.0.5"
@@ -4391,6 +4345,52 @@ __metadata:
   checksum: 96563d9965729cfcb3f5f19c26d013c6831b4cb38d79d8c185e9cd669ea6a9ffe8fb9ccc74d29a068c9078aa0e2767053ed6b19aa32723c41550340d0094bea0
   languageName: node
   linkType: hard
+
+"htpasswd-dashboard@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "htpasswd-dashboard@workspace:."
+  dependencies:
+    "@emotion/react": 11.10.8
+    "@emotion/server": 11.10.0
+    "@kubernetes/client-node": 0.18.1
+    "@mantine/core": 5.10.4
+    "@mantine/hooks": 5.10.4
+    "@mantine/next": 5.10.4
+    "@mantine/notifications": 5.10.4
+    "@slashnephy/eslint-config": 0.4.22
+    "@slashnephy/prettier-config": 0.1.16
+    "@tabler/icons-react": 2.17.0
+    "@types/bcrypt": 5.0.0
+    "@types/gravatar": 1.8.3
+    "@types/jsonwebtoken": 9.0.2
+    "@types/node": 18.16.5
+    "@types/react": 18.2.5
+    "@types/react-dom": 18.2.4
+    "@typescript-eslint/eslint-plugin": 5.59.2
+    "@typescript-eslint/parser": 5.59.2
+    async-mutex: 0.4.0
+    bcrypt: 5.1.0
+    concurrently: 8.0.1
+    eslint: 8.40.0
+    eslint-plugin-deprecation: 1.4.1
+    eslint-plugin-import: 2.27.5
+    eslint-plugin-jest: 27.2.1
+    eslint-plugin-unused-imports: 2.0.0
+    gravatar: 1.8.2
+    http-status-codes: 2.2.0
+    jsonwebtoken: 9.0.0
+    jwks-rsa: 3.0.1
+    nanoid: 4.0.2
+    next: 13.3.4
+    prettier: 2.8.8
+    react: 18.2.0
+    react-dom: 18.2.0
+    react-query: 3.39.3
+    ts-array-length: 0.1.2
+    typescript: 5.0.4
+    zod: 3.21.4
+  languageName: unknown
+  linkType: soft
 
 "http-cache-semantics@npm:^4.1.0":
   version: 4.1.0

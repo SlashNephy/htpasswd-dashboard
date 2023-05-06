@@ -36,6 +36,7 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             }}
           >
             <NotificationsProvider position="top-right" autoClose={7000}>
+              {/* @ts-ignore */}
               <Component {...pageProps} />
             </NotificationsProvider>
           </MantineProvider>
