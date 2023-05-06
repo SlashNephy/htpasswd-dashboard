@@ -15,7 +15,7 @@ import {
   IconKey,
   IconUserExclamation,
 } from '@tabler/icons-react'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 
 import { fetcher } from '../lib/fetcher'
@@ -24,10 +24,13 @@ import type { IssueResponse, StatusResponse } from '../lib/api'
 import type { Credential } from '../lib/htpasswd'
 import type { Service } from '../lib/services'
 
-export const GeneratePasswordButton: React.FC<{
+export function GeneratePasswordButton({
+  service,
+  onGenerate,
+}: {
   service: Service
   onGenerate(credential: Credential): void
-}> = ({ service, onGenerate }) => {
+}): JSX.Element {
   const query = useQueryClient()
   const {
     data: status,
@@ -81,9 +84,9 @@ export const GeneratePasswordButton: React.FC<{
   if (isError || status?.success !== true) {
     return (
       <Alert
+        color="red"
         icon={<IconAlertTriangle size={16} />}
         title="エラーが発生しました"
-        color="red"
       >
         パスワード生成履歴を取得できませんでした。
       </Alert>
@@ -98,21 +101,21 @@ export const GeneratePasswordButton: React.FC<{
           position="bottom"
         >
           <Button
+            fullWidth
             color="red"
             leftIcon={<IconUserExclamation />}
-            onClick={handleClick}
-            fullWidth
             style={{ marginTop: 20 }}
+            onClick={handleClick}
           >
             パスワードを再生成する
           </Button>
         </Tooltip>
       ) : (
         <Button
-          leftIcon={<IconKey />}
-          onClick={handleClick}
           fullWidth
+          leftIcon={<IconKey />}
           style={{ marginTop: 20 }}
+          onClick={handleClick}
         >
           パスワードを生成する
         </Button>

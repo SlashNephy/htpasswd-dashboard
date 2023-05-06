@@ -220,3 +220,4 @@ dist
 .pnp.*
 
 *.htpasswd
+services.json

@@ -16,11 +16,11 @@ import { useQuery } from 'react-query'
 import { AppLayout } from '../components/AppLayout'
 import { ServiceCard } from '../components/ServiceCard'
 import { fetcher } from '../lib/fetcher'
-import { services } from '../lib/services'
 import packageJson from '../package.json'
 
 import type { HelloResponse } from '../lib/api'
 import type { NextPage } from 'next'
+import { Service } from '../lib/services'
 
 const Index: NextPage = () => {
   const {
@@ -28,6 +28,9 @@ const Index: NextPage = () => {
     isLoading,
     isError,
   } = useQuery('hello', async () => fetcher<HelloResponse>('/api/hello'))
+  const { data: services } = useQuery('services', async () =>
+    fetcher<Service[]>('/api/services')
+  )
 
   return (
     <AppLayout>
@@ -69,7 +72,7 @@ const Index: NextPage = () => {
       <Space h={200} />
 
       <Grid justify="center">
-        {services.map((service) => (
+        {services?.map((service) => (
           <Grid.Col key={service.key} span={6}>
             <ServiceCard service={service} shadow="md" p="lg" m="lg" />
           </Grid.Col>

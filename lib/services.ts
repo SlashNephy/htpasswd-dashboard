@@ -1,27 +1,39 @@
-export type Service = {
-  key: string
-  name: string
-  url: string
-  imageUrl: string
-  apiUrl: string
-  exampleApiUrl: string
-}
+import { readFile } from 'fs/promises'
 
-export const services: Service[] = [
-  {
-    key: 'mirakurun',
-    name: 'Mirakurun',
-    url: 'https://mirakurun.starry.blue',
-    imageUrl: '/mirakurun.webp',
-    apiUrl: 'https://mirakurun-api.starry.blue/api',
-    exampleApiUrl: 'https://mirakurun-api.starry.blue/api/status',
-  },
-  {
-    key: 'epgstation',
-    name: 'EPGStation',
-    url: 'https://epgstation.starry.blue',
-    imageUrl: '/epgstation.jpeg',
-    apiUrl: 'https://epgstation-api.starry.blue/api',
-    exampleApiUrl: 'https://epgstation-api.starry.blue/api/version',
-  },
-]
+import { z } from 'zod'
+
+import { env } from './config'
+
+const schema = z
+  .object({
+    key: z.string(),
+    name: z.string(),
+    urls: z.object({
+      app: z.string(),
+      logo: z.string(),
+      api_base: z.string(),
+      example_api: z.string(),
+    }),
+    backend: z.object({
+      kubernetes: z
+        .object({
+          namespace: z.string(),
+          name: z.string(),
+        })
+        .optional(),
+      file: z
+        .object({
+          path: z.string(),
+        })
+        .optional(),
+    }),
+  })
+  .array()
+
+export type Service = z.infer<typeof schema>[0]
+
+export const loadServices = async (): Promise<Service[]> => {
+  const content = await readFile(env.SERVICES_JSON_PATH, 'utf-8')
+  const data = JSON.parse(content)
+  return schema.parseAsync(data)
+}

@@ -33,7 +33,7 @@ export const validateJwt = async (
     throw new Error('No JWT provided')
   }
 
-  return await validateCloudflareJwt(jwt)
+  return validateCloudflareJwt(jwt)
 }
 
 const extractJwt = (headers: IncomingHttpHeaders): string | undefined => {

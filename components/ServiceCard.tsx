@@ -1,5 +1,5 @@
 import { Card, Grid, Group, Image, Text, useMantineTheme } from '@mantine/core'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { CredentialModal } from './CredentialModal'
 import { GeneratePasswordButton } from './GeneratePasswordButton'
@@ -8,9 +8,10 @@ import type { Credential } from '../lib/htpasswd'
 import type { Service } from '../lib/services'
 import type { CardProps } from '@mantine/core'
 
-export const ServiceCard: React.FC<
-  Omit<CardProps, 'children'> & { service: Service }
-> = ({ service, ...props }) => {
+export function ServiceCard({
+  service,
+  ...props
+}: Omit<CardProps, 'children'> & { service: Service }): JSX.Element {
   const theme = useMantineTheme()
   const [credential, setCredential] = useState<Credential>()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -22,25 +23,30 @@ export const ServiceCard: React.FC<
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text weight={600} size="lg" mb="md">
+          <Text mb="md" size="lg" weight={600}>
             {service.name}
           </Text>
         </Group>
 
-        <Card.Section component="a" href={service.url} target="_blank" mb="md">
+        <Card.Section
+          component="a"
+          href={service.urls.app}
+          mb="md"
+          target="_blank"
+        >
           <Image
             alt={service.name}
-            height={160}
-            src={service.imageUrl}
             fit="contain"
+            height={160}
+            src={service.urls.logo}
           />
         </Card.Section>
 
         <Grid justify="center">
           <GeneratePasswordButton
             service={service}
-            onGenerate={(credential) => {
-              setCredential(credential)
+            onGenerate={(c) => {
+              setCredential(c)
               setIsModalOpen(true)
             }}
           />
@@ -49,11 +55,11 @@ export const ServiceCard: React.FC<
 
       {credential !== undefined && (
         <CredentialModal
-          service={service}
-          credential={credential}
-          size="xl"
           centered
+          credential={credential}
           opened={isModalOpen}
+          service={service}
+          size="xl"
           onClose={() => {
             setIsModalOpen(false)
             setCredential(undefined)

@@ -1,6 +1,6 @@
 import { HtpasswdFileBackend } from './HtpasswdFileBackend'
 import { KubernetesSecretBackend } from './KubernetesSecretBackend'
-import { env } from '../config'
+import { loadServices } from '../services'
 
 export type Credential = {
   username: string
@@ -12,41 +12,23 @@ export type HtpasswdBackend = {
   append(username: string): Promise<Credential>
 }
 
-export const getHtpasswdInstance = (
+export const getHtpasswdInstance = async (
   serviceKey: string
-): HtpasswdBackend | undefined => {
-  switch (serviceKey) {
-    case 'mirakurun':
-      if (env.MIRAKURUN_HTPASSWD_PATH !== undefined) {
-        return new HtpasswdFileBackend(env.MIRAKURUN_HTPASSWD_PATH)
-      }
+): Promise<HtpasswdBackend | undefined> => {
+  const services = await loadServices()
+  const service = services.find((s) => s.key === serviceKey)
+  if (service === undefined) {
+    return
+  }
 
-      if (
-        env.MIRAKURUN_K8S_NAMESPACE !== undefined &&
-        env.MIRAKURUN_K8S_SECRET_NAME !== undefined
-      ) {
-        return new KubernetesSecretBackend(
-          env.MIRAKURUN_K8S_NAMESPACE,
-          env.MIRAKURUN_K8S_SECRET_NAME
-        )
-      }
-      return
+  if (service.backend.file !== undefined) {
+    return new HtpasswdFileBackend(service.backend.file.path)
+  }
 
-    case 'epgstation':
-      if (env.EPGSTATION_HTPASSWD_PATH !== undefined) {
-        return new HtpasswdFileBackend(env.EPGSTATION_HTPASSWD_PATH)
-      }
-
-      if (
-        env.EPGSTATION_K8S_NAMESPACE !== undefined &&
-        env.EPGSTATION_K8S_SECRET_NAME !== undefined
-      ) {
-        return new KubernetesSecretBackend(
-          env.EPGSTATION_K8S_NAMESPACE,
-          env.EPGSTATION_K8S_SECRET_NAME
-        )
-      }
-
-      return
+  if (service.backend.kubernetes !== undefined) {
+    return new KubernetesSecretBackend(
+      service.backend.kubernetes.namespace,
+      service.backend.kubernetes.name
+    )
   }
 }

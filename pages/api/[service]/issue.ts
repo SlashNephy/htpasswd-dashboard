@@ -18,8 +18,7 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
   }
 
   const { service: key } = req.query
-
-  const htpasswd = getHtpasswdInstance(key as string)
+  const htpasswd = await getHtpasswdInstance(key as string)
   if (htpasswd === undefined) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,

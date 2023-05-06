@@ -17,15 +17,16 @@ import {
   IconClipboardText,
   IconExclamationMark,
 } from '@tabler/icons-react'
-import React from 'react'
 
 import type { Credential } from '../lib/htpasswd'
 import type { Service } from '../lib/services'
 import type { ModalProps } from '@mantine/core'
 
-export const CredentialModal: React.FC<
-  ModalProps & { service: Service; credential: Credential }
-> = ({ service, credential, ...props }) => {
+export function CredentialModal({
+  service,
+  credential,
+  ...props
+}: ModalProps & { service: Service; credential: Credential }): JSX.Element {
   const clipboard = useClipboard()
   const handleClipboardClick = (value: string) => {
     clipboard.copy(value)
@@ -89,7 +90,7 @@ export const CredentialModal: React.FC<
         {service.name} に Basic 認証でアクセスするには、
         以下のエンドポイントを使用します。
       </Text>
-      <Code block>{service.apiUrl}</Code>
+      <Code block>{service.urls.api_base}</Code>
 
       <Space p={15} />
 
@@ -99,7 +100,7 @@ export const CredentialModal: React.FC<
         {'    '}
         -u &quot;{credential.username}:{credential.password}&quot; \<br />
         {'    '}
-        {service.exampleApiUrl}
+        {service.urls.example_api}
       </Code>
     </Modal>
   )

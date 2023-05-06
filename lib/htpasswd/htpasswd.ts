@@ -1,3 +1,5 @@
+import { hasLength } from 'ts-array-length'
+
 export type HtpasswdEntry =
   | {
       username: string
@@ -8,22 +10,19 @@ export type HtpasswdEntry =
     }
 
 // @ は URI エンコードが必要なので避ける
-export const escapeUsername = (username: string): string => {
-  return username.replace('@', '.')
-}
+export const escapeUsername = (username: string): string =>
+  username.replace('@', '.')
 
-export const encodeHtpasswd = (entries: HtpasswdEntry[]): string => {
-  return entries
+export const encodeHtpasswd = (entries: HtpasswdEntry[]): string =>
+  entries
     .map((entry) => {
       if ('username' in entry) {
         return `${entry.username}:${entry.hashedPassword}`
-      } else {
-        return entry.comment
       }
+      return entry.comment
     })
     .join('\n')
     .trim()
-}
 
 export const decodeHtpasswd = (content: string): HtpasswdEntry[] => {
   const entries: HtpasswdEntry[] = []
@@ -35,7 +34,12 @@ export const decodeHtpasswd = (content: string): HtpasswdEntry[] => {
       continue
     }
 
-    const [username, hashedPassword] = line.split(':', 2)
+    const fragments = line.split(':', 2)
+    if (!hasLength(fragments, 2)) {
+      continue
+    }
+
+    const [username, hashedPassword] = fragments
     entries.push({
       username,
       hashedPassword,

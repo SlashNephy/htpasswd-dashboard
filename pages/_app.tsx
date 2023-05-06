@@ -1,7 +1,6 @@
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { NotificationsProvider } from '@mantine/notifications'
 import Head from 'next/head'
-import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import packageJson from './../package.json'
@@ -11,7 +10,7 @@ import type { AppProps } from 'next/app'
 
 const queryClient = new QueryClient()
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const [colorScheme, toggleColorScheme] = useColorScheme()
 
   return (
@@ -45,6 +44,3 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     </>
   )
 }
-
-// noinspection JSUnusedGlobalSymbols
-export default MyApp
