@@ -18,7 +18,7 @@ import {
   IconExclamationMark,
 } from '@tabler/icons-react'
 
-import type { Credential } from '../lib/htpasswd'
+import type { Credential } from '../lib/htpasswd/backend'
 import type { Service } from '../lib/services'
 import type { ModalProps } from '@mantine/core'
 

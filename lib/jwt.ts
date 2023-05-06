@@ -16,6 +16,11 @@ const client = new JwksClient({
 
 const getKey: GetPublicKeyOrSecret = (header, callback) => {
   client.getSigningKey(header.kid, (error, key) => {
+    if (error) {
+      callback(error)
+      return
+    }
+
     const signingKey = key?.getPublicKey()
     callback(null, signingKey)
   })
@@ -23,8 +28,8 @@ const getKey: GetPublicKeyOrSecret = (header, callback) => {
 
 export const validateCloudflareJwt = async (
   token: string
-): Promise<CloudflareJwt> => {
-  return new Promise((resolve, reject) => {
+): Promise<CloudflareJwt> =>
+  new Promise((resolve, reject) => {
     verify(
       token,
       getKey,
@@ -41,4 +46,3 @@ export const validateCloudflareJwt = async (
       }
     )
   })
-}

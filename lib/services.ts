@@ -8,6 +8,7 @@ const schema = z
   .object({
     key: z.string(),
     name: z.string(),
+    description: z.string().optional(),
     urls: z.object({
       app: z.string(),
       logo: z.string(),

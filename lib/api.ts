@@ -1,4 +1,4 @@
-import type { Credential } from './htpasswd'
+import type { Credential } from './htpasswd/backend'
 import type { CloudflareJwt } from './jwt'
 
 export type ApiResponse<T> =

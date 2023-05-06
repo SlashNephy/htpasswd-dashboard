@@ -21,7 +21,7 @@ import { useQuery, useQueryClient } from 'react-query'
 import { fetcher } from '../lib/fetcher'
 
 import type { IssueResponse, StatusResponse } from '../lib/api'
-import type { Credential } from '../lib/htpasswd'
+import type { Credential } from '../lib/htpasswd/backend'
 import type { Service } from '../lib/services'
 
 export function GeneratePasswordButton({

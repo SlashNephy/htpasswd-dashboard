@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { CredentialModal } from './CredentialModal'
 import { GeneratePasswordButton } from './GeneratePasswordButton'
 
-import type { Credential } from '../lib/htpasswd'
+import type { Credential } from '../lib/htpasswd/backend'
 import type { Service } from '../lib/services'
 import type { CardProps } from '@mantine/core'
 

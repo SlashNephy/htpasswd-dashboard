@@ -1,10 +1,8 @@
-import { readFile, lstat, writeFile } from 'fs/promises'
+import { HtpasswdFile } from './HtpasswdFile'
+import { escapeUsername } from '../htpasswd'
+import { generateHash, generatePassword } from '../password'
 
-import { decodeHtpasswd, encodeHtpasswd, escapeUsername } from './htpasswd'
-import { generateHash, generatePassword } from './password'
-
-import type { HtpasswdEntry } from './htpasswd'
-import type { Credential, HtpasswdBackend } from './index'
+import type { Credential, HtpasswdBackend } from '../backend'
 
 export class HtpasswdFileBackend implements HtpasswdBackend {
   private readonly file: HtpasswdFile
@@ -48,31 +46,5 @@ export class HtpasswdFileBackend implements HtpasswdBackend {
       username: escapedUsername,
       password,
     }
-  }
-}
-
-class HtpasswdFile {
-  public constructor(public readonly path: string) {}
-
-  public async exists(): Promise<boolean> {
-    try {
-      return (await lstat(this.path)).isFile()
-    } catch {
-      return false
-    }
-  }
-
-  public async read(): Promise<HtpasswdEntry[]> {
-    if (!(await this.exists())) {
-      return []
-    }
-
-    const content = await readFile(this.path, 'utf8')
-    return decodeHtpasswd(content)
-  }
-
-  public async write(entries: HtpasswdEntry[]): Promise<void> {
-    const content = encodeHtpasswd(entries)
-    await writeFile(this.path, `${content}\n`)
   }
 }

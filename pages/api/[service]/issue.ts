@@ -1,7 +1,7 @@
 import { Mutex } from 'async-mutex'
 import { StatusCodes } from 'http-status-codes'
 
-import { getHtpasswdInstance } from '../../../lib/htpasswd'
+import { getHtpasswdBackendInstance } from '../../../lib/htpasswd/backend'
 import { validateJwt } from '../hello'
 
 import type { IssueResponse } from '../../../lib/api'
@@ -18,7 +18,7 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
   }
 
   const { service: key } = req.query
-  const htpasswd = await getHtpasswdInstance(key as string)
+  const htpasswd = await getHtpasswdBackendInstance(key as string)
   if (htpasswd === undefined) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,

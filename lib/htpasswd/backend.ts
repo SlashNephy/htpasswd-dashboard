@@ -1,5 +1,5 @@
-import { HtpasswdFileBackend } from './HtpasswdFileBackend'
-import { KubernetesSecretBackend } from './KubernetesSecretBackend'
+import { HtpasswdFileBackend } from './file/HtpasswdFileBackend'
+import { KubernetesSecretBackend } from './kubernetes/KubernetesSecretBackend'
 import { loadServices } from '../services'
 
 export type Credential = {
@@ -12,7 +12,7 @@ export type HtpasswdBackend = {
   append(username: string): Promise<Credential>
 }
 
-export const getHtpasswdInstance = async (
+export const getHtpasswdBackendInstance = async (
   serviceKey: string
 ): Promise<HtpasswdBackend | undefined> => {
   const services = await loadServices()
