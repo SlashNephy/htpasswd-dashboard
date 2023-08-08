@@ -1,16 +1,17 @@
 import { createGetInitialProps } from '@mantine/next'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import React from 'react'
 
 const getInitialProps = createGetInitialProps()
 
 export default class MyDocument extends Document {
   public static getInitialProps = getInitialProps
 
-  public render(): JSX.Element {
+  public render(): React.JSX.Element {
     return (
       <Html lang="ja">
         <Head>
-          <link rel="icon" href="/favicon.ico" />
+          <link href="/favicon.ico" rel="icon" />
         </Head>
         <body>
           <Main />

@@ -15,8 +15,8 @@ import {
   IconKey,
   IconUserExclamation,
 } from '@tabler/icons-react'
-import { useCallback } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useCallback } from 'react'
 
 import { fetcher } from '../lib/fetcher'
 
@@ -30,7 +30,7 @@ export function GeneratePasswordButton({
 }: {
   service: Service
   onGenerate(credential: Credential): void
-}): JSX.Element {
+}): React.JSX.Element {
   const query = useQueryClient()
   const {
     data: status,
@@ -81,7 +81,7 @@ export function GeneratePasswordButton({
     )
   }
 
-  if (isError || status?.success !== true) {
+  if (isError || !status.success) {
     return (
       <Alert
         color="red"

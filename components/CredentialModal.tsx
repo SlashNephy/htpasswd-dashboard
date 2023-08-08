@@ -17,6 +17,7 @@ import {
   IconClipboardText,
   IconExclamationMark,
 } from '@tabler/icons-react'
+import React from 'react'
 
 import type { Credential } from '../lib/htpasswd/backend'
 import type { Service } from '../lib/services'
@@ -26,7 +27,10 @@ export function CredentialModal({
   service,
   credential,
   ...props
-}: ModalProps & { service: Service; credential: Credential }): JSX.Element {
+}: ModalProps & {
+  service: Service
+  credential: Credential
+}): React.JSX.Element {
   const clipboard = useClipboard()
   const handleClipboardClick = (value: string) => {
     clipboard.copy(value)

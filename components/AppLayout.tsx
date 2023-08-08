@@ -9,13 +9,14 @@ import {
   Title,
 } from '@mantine/core'
 import { IconHeart, IconPackage } from '@tabler/icons-react'
+import React from 'react'
 
 import { ToggleThemeButton } from './ToggleThemeButton'
 import packageJson from '../package.json'
 
 import type { PropsWithChildren } from 'react'
 
-export function AppLayout({ children }: PropsWithChildren): JSX.Element {
+export function AppLayout({ children }: PropsWithChildren): React.JSX.Element {
   return (
     <AppShell
       footer={

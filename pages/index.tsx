@@ -9,9 +9,9 @@ import {
   Text,
 } from '@mantine/core'
 import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react'
+import { useQuery } from '@tanstack/react-query'
 import gravatar from 'gravatar'
 import React from 'react'
-import { useQuery } from 'react-query'
 
 import { AppLayout } from '../components/AppLayout'
 import { ServiceCard } from '../components/ServiceCard'
@@ -19,16 +19,16 @@ import { fetcher } from '../lib/fetcher'
 import packageJson from '../package.json'
 
 import type { HelloResponse } from '../lib/api'
+import type { Service } from '../lib/services'
 import type { NextPage } from 'next'
-import { Service } from '../lib/services'
 
 const Index: NextPage = () => {
   const {
     data: hello,
     isLoading,
     isError,
-  } = useQuery('hello', async () => fetcher<HelloResponse>('/api/hello'))
-  const { data: services } = useQuery('services', async () =>
+  } = useQuery(['hello'], async () => fetcher<HelloResponse>('/api/hello'))
+  const { data: services } = useQuery(['services'], async () =>
     fetcher<Service[]>('/api/services')
   )
 
@@ -52,18 +52,18 @@ const Index: NextPage = () => {
             <Text>ユーザーを確認しています...</Text>
           </Group>
         </Center>
-      ) : isError || hello?.success !== true ? (
+      ) : isError || !hello.success ? (
         <Alert
+          color="red"
           icon={<IconAlertTriangle size={16} />}
           title="エラーが発生しました"
-          color="red"
         >
           ユーザーを確認できませんでした。
         </Alert>
       ) : (
         <Alert
           color="green"
-          icon={<Avatar src={gravatar.url(hello.email)} size={30} />}
+          icon={<Avatar size={30} src={gravatar.url(hello.email)} />}
         >
           {hello.email} としてログインしています。
         </Alert>
@@ -74,7 +74,7 @@ const Index: NextPage = () => {
       <Grid justify="center">
         {services?.map((service) => (
           <Grid.Col key={service.key} span={6}>
-            <ServiceCard service={service} shadow="md" p="lg" m="lg" />
+            <ServiceCard m="lg" p="lg" service={service} shadow="md" />
           </Grid.Col>
         ))}
       </Grid>

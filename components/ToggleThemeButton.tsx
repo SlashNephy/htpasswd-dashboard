@@ -7,12 +7,12 @@ export const ToggleThemeButton: React.FC = () => {
 
   return (
     <ActionIcon
-      variant="outline"
       color={colorScheme === 'dark' ? 'yellow' : 'blue'}
+      title="テーマを切り替える"
+      variant="outline"
       onClick={() => {
         toggleColorScheme()
       }}
-      title="テーマを切り替える"
     >
       {colorScheme === 'dark' ? (
         <IconSun size={18} />

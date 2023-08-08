@@ -1,5 +1,5 @@
 import { Card, Grid, Group, Image, Text, useMantineTheme } from '@mantine/core'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { CredentialModal } from './CredentialModal'
 import { GeneratePasswordButton } from './GeneratePasswordButton'
@@ -11,7 +11,7 @@ import type { CardProps } from '@mantine/core'
 export function ServiceCard({
   service,
   ...props
-}: Omit<CardProps, 'children'> & { service: Service }): JSX.Element {
+}: Omit<CardProps, 'children'> & { service: Service }): React.JSX.Element {
   const theme = useMantineTheme()
   const [credential, setCredential] = useState<Credential>()
   const [isModalOpen, setIsModalOpen] = useState(false)
