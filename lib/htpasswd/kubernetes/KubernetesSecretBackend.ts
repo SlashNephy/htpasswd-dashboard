@@ -13,7 +13,10 @@ type TraefikBasicAuthSecret = {
 export class KubernetesSecretBackend implements HtpasswdBackend {
   private readonly api: KubernetesApiClient
 
-  public constructor(public namespace: string, public name: string) {
+  public constructor(
+    public namespace: string,
+    public name: string
+  ) {
     this.api = new KubernetesApiClient()
   }
 
