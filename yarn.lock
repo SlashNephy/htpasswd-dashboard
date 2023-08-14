@@ -1052,14 +1052,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.16.20":
-  version: 18.16.20
-  resolution: "@types/node@npm:18.16.20"
-  checksum: 00ea5668e12047447b20bb31408ae717823e5b879c4c6296036216756874b2dc7976086343ffb6a717eb52e8d73dc6972d90b9134ef464b7361673228a02ed41
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^18.11.17":
+"@types/node@npm:18.17.5, @types/node@npm:^18.11.17":
   version: 18.17.5
   resolution: "@types/node@npm:18.17.5"
   checksum: b8c658a99234b99425243c324b641ed7b9ceb6bee6b06421fdc9bb7c58f9a5552e353225cc549e6982462ac384abe1985022ed76e2e4728797f59b21f659ca2b
@@ -3971,7 +3964,7 @@ __metadata:
     "@types/bcrypt": 5.0.0
     "@types/gravatar": 1.8.3
     "@types/jsonwebtoken": 9.0.2
-    "@types/node": 18.16.20
+    "@types/node": 18.17.5
     "@types/react": 18.2.6
     "@types/react-dom": 18.2.4
     async-mutex: 0.4.0
