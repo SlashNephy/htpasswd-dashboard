@@ -1024,16 +1024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:9.0.2":
-  version: 9.0.2
-  resolution: "@types/jsonwebtoken@npm:9.0.2"
-  dependencies:
-    "@types/node": "*"
-  checksum: 3bb8d40e78d7eb53e427db6e9f0f22e0890cfee80965dcf741d08341814913afb211306de6e9847c6d241cc8e36f8a59090cbfdcc510ab7c81af9d650c5afe0e
-  languageName: node
-  linkType: hard
-
-"@types/jsonwebtoken@npm:^9.0.0":
+"@types/jsonwebtoken@npm:9.0.3, @types/jsonwebtoken@npm:^9.0.0":
   version: 9.0.3
   resolution: "@types/jsonwebtoken@npm:9.0.3"
   dependencies:
@@ -4055,7 +4046,7 @@ __metadata:
     "@tanstack/react-query": 4.35.3
     "@types/bcrypt": 5.0.0
     "@types/gravatar": 1.8.3
-    "@types/jsonwebtoken": 9.0.2
+    "@types/jsonwebtoken": 9.0.3
     "@types/node": 18.17.15
     "@types/react": 18.2.6
     "@types/react-dom": 18.2.4
