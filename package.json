@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
-    "@kubernetes/client-node": "0.18.1",
+    "@kubernetes/client-node": "0.19.0",
     "@mantine/core": "5.10.5",
     "@mantine/hooks": "5.10.5",
     "@mantine/next": "5.10.5",

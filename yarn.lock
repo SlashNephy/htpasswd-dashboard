@@ -352,12 +352,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kubernetes/client-node@npm:0.18.1":
-  version: 0.18.1
-  resolution: "@kubernetes/client-node@npm:0.18.1"
+"@kubernetes/client-node@npm:0.19.0":
+  version: 0.19.0
+  resolution: "@kubernetes/client-node@npm:0.19.0"
   dependencies:
     "@types/js-yaml": ^4.0.1
-    "@types/node": ^18.11.17
+    "@types/node": ^20.1.1
     "@types/request": ^2.47.1
     "@types/ws": ^8.5.3
     byline: ^5.0.0
@@ -369,14 +369,12 @@ __metadata:
     rfc4648: ^1.3.0
     stream-buffers: ^3.0.2
     tar: ^6.1.11
-    tmp-promise: ^3.0.2
     tslib: ^2.4.1
-    underscore: ^1.13.6
     ws: ^8.11.0
   dependenciesMeta:
     openid-client:
       optional: true
-  checksum: 7205f10256f182a0292d483195fab7f4d9b500b3a47e6861dcf2fa8851c0bfd554e4f9a9f832ff76500efefb0422df2ecf2e378c5c3a4290e86abd8bc69ef11d
+  checksum: d29ccfb562ac51a81f74de570eb832d150be6b73ba887ae1be682df9a34c3ab846d4d4ba74f0a9f0e0ce4da573f949ba712115e1d0513148cdf683a22d729e7f
   languageName: node
   linkType: hard
 
@@ -1047,14 +1045,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^20.1.1":
   version: 20.6.2
   resolution: "@types/node@npm:20.6.2"
   checksum: 96fe5303872640a173f3fd43e289a451776ed5b8f0090094447c6790b43f23fb607eea8268af0829cef4d132e5afa0bfa4cd871aa7412e9042a414a698e9e971
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.17.17, @types/node@npm:^18.11.17":
+"@types/node@npm:18.17.17":
   version: 18.17.17
   resolution: "@types/node@npm:18.17.17"
   checksum: ff28f347c77723780836f9bb2ffa6db0cd72490bfd7604397c03db31db34f1f2899e82f0aaf3e825efeb09c15bd94d076ea9aca19a1407e1b56cb4603318936c
@@ -4028,7 +4026,7 @@ __metadata:
   dependencies:
     "@emotion/react": 11.11.1
     "@emotion/server": 11.11.0
-    "@kubernetes/client-node": 0.18.1
+    "@kubernetes/client-node": 0.19.0
     "@mantine/core": 5.10.5
     "@mantine/hooks": 5.10.5
     "@mantine/next": 5.10.5
@@ -6173,7 +6171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
+"rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -6744,24 +6742,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tmp-promise@npm:^3.0.2":
-  version: 3.0.3
-  resolution: "tmp-promise@npm:3.0.3"
-  dependencies:
-    tmp: ^0.2.0
-  checksum: f854f5307dcee6455927ec3da9398f139897faf715c5c6dcee6d9471ae85136983ea06662eba2edf2533bdcb0fca66d16648e79e14381e30c7fb20be9c1aa62c
-  languageName: node
-  linkType: hard
-
-"tmp@npm:^0.2.0":
-  version: 0.2.1
-  resolution: "tmp@npm:0.2.1"
-  dependencies:
-    rimraf: ^3.0.0
-  checksum: 8b1214654182575124498c87ca986ac53dc76ff36e8f0e0b67139a8d221eaecfdec108c0e6ec54d76f49f1f72ab9325500b246f562b926f85bcdfca8bf35df9e
-  languageName: node
-  linkType: hard
-
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -6992,13 +6972,6 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
-  languageName: node
-  linkType: hard
-
-"underscore@npm:^1.13.6":
-  version: 1.13.6
-  resolution: "underscore@npm:1.13.6"
-  checksum: d5cedd14a9d0d91dd38c1ce6169e4455bb931f0aaf354108e47bd46d3f2da7464d49b2171a5cf786d61963204a42d01ea1332a903b7342ad428deaafaf70ec36
   languageName: node
   linkType: hard
 
