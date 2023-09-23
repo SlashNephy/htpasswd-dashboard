@@ -987,10 +987,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/gravatar@npm:1.8.3":
-  version: 1.8.3
-  resolution: "@types/gravatar@npm:1.8.3"
-  checksum: 7d05ab0b0fae62c6932bbb952b863e67a96385dd428a4cef161518e5e5176788194db34ca0815ce28a41779e472ea3d6ca21fedd0f00d77e62b016b59117bf81
+"@types/gravatar@npm:1.8.4":
+  version: 1.8.4
+  resolution: "@types/gravatar@npm:1.8.4"
+  checksum: 8d8f5a6bd54da5b5b0c7b64c6f31c05b4e72e1af7bfb688992036787224c23cd0c17d9a6b8aee2c257cbf8d5ce71f5eba469f9c2d265699a45948adcace6c7b2
   languageName: node
   linkType: hard
 
@@ -4036,7 +4036,7 @@ __metadata:
     "@tabler/icons-react": 2.34.0
     "@tanstack/react-query": 4.35.3
     "@types/bcrypt": 5.0.0
-    "@types/gravatar": 1.8.3
+    "@types/gravatar": 1.8.4
     "@types/jsonwebtoken": 9.0.3
     "@types/node": 18.17.18
     "@types/react": 18.2.6
