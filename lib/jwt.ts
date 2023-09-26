@@ -18,6 +18,7 @@ const getKey: GetPublicKeyOrSecret = (header, callback) => {
   client.getSigningKey(header.kid, (error, key) => {
     if (error) {
       callback(error)
+
       return
     }
 

@@ -14,6 +14,7 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
     res.status(StatusCodes.METHOD_NOT_ALLOWED).json({
       success: false,
     })
+
     return
   }
 
@@ -23,6 +24,7 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
     })
+
     return
   }
 
@@ -36,6 +38,7 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
     res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
     })
+
     return
   }
 

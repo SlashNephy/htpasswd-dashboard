@@ -21,6 +21,7 @@ export class HtpasswdFile {
     }
 
     const content = await readFile(this.path, 'utf8')
+
     return decodeHtpasswd(content)
   }
 

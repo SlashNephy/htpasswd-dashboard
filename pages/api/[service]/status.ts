@@ -13,6 +13,7 @@ export const handler: NextApiHandler<StatusResponse> = async (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
     })
+
     return
   }
 
@@ -26,6 +27,7 @@ export const handler: NextApiHandler<StatusResponse> = async (req, res) => {
     res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
     })
+
     return
   }
 

@@ -19,6 +19,7 @@ export const encodeHtpasswd = (entries: HtpasswdEntry[]): string =>
       if ('username' in entry) {
         return `${entry.username}:${entry.hashedPassword}`
       }
+
       return entry.comment
     })
     .join('\n')

@@ -33,6 +33,7 @@ export class KubernetesSecretBackend implements HtpasswdBackend {
 
     const users = decodeBase64(secret.users)
     const entries = decodeHtpasswd(users)
+
     return entries.some(
       (entry) => 'username' in entry && entry.username === escapedUsername
     )

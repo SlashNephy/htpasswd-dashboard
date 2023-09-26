@@ -14,6 +14,7 @@ export class HtpasswdFileBackend implements HtpasswdBackend {
   public async has(username: string): Promise<boolean> {
     const escapedUsername = escapeUsername(username)
     const entries = await this.file.read()
+
     return entries.some(
       (entry) => 'username' in entry && entry.username === escapedUsername
     )

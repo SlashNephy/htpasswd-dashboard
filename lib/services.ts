@@ -36,5 +36,6 @@ export type Service = z.infer<typeof schema>[0]
 export const loadServices = async (): Promise<Service[]> => {
   const content = await readFile(env.SERVICES_JSON_PATH, 'utf-8')
   const data = JSON.parse(content)
+
   return schema.parseAsync(data)
 }

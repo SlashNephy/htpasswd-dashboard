@@ -23,5 +23,6 @@ export const useColorScheme = () => {
   }
 
   const colorScheme = isDark ? 'dark' : 'light'
+
   return [colorScheme, toggleColorScheme] as const
 }
