@@ -41,7 +41,7 @@
     "zod": "3.22.3"
   },
   "devDependencies": {
-    "@slashnephy/eslint-config": "2.0.38",
+    "@slashnephy/eslint-config": "2.0.39",
     "@slashnephy/prettier-config": "1.0.25",
     "@types/bcrypt": "5.0.0",
     "@types/gravatar": "1.8.4",
