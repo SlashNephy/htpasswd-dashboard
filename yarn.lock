@@ -794,9 +794,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@slashnephy/eslint-config@npm:2.0.74":
-  version: 2.0.74
-  resolution: "@slashnephy/eslint-config@npm:2.0.74"
+"@slashnephy/eslint-config@npm:2.0.77":
+  version: 2.0.77
+  resolution: "@slashnephy/eslint-config@npm:2.0.77"
   dependencies:
     "@emotion/eslint-plugin": 11.11.0
     "@next/eslint-plugin-next": 13.5.6
@@ -827,7 +827,7 @@ __metadata:
     eslint-plugin-promise: 6.1.1
     eslint-plugin-react: 7.33.2
     eslint-plugin-react-hooks: 4.6.0
-    eslint-plugin-react-refresh: 0.4.4
+    eslint-plugin-react-refresh: 0.4.5
     eslint-plugin-relay: 1.8.3
     eslint-plugin-storybook: 0.6.15
     eslint-plugin-tsdoc: 0.2.17
@@ -836,11 +836,11 @@ __metadata:
     eslint-plugin-vitest: 0.3.10
     eslint-plugin-xss: 0.1.12
     eslint-plugin-yml: 1.10.0
-    typescript: 5.3.2
+    typescript: 5.3.3
     yaml-eslint-parser: 1.2.2
   peerDependencies:
     eslint: ^8
-  checksum: 4b6e68ab3ae708f8ea4605aeb40d73861de34f257f527a46adb0ba693517c7654bc5c39a1a909bfd77e3cc07222e782d1eb305e962cada77ffc1a39e102b705f
+  checksum: 8d131693afbd537940e13c9bc1ad19fb42be7225dccb5b3fe8b077a1a7b5c46d679f7b446abff3ca6bcc15a2e94b5935fe0484680323f84eda7c849c01e78203
   languageName: node
   linkType: hard
 
@@ -3202,12 +3202,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-refresh@npm:0.4.4":
-  version: 0.4.4
-  resolution: "eslint-plugin-react-refresh@npm:0.4.4"
+"eslint-plugin-react-refresh@npm:0.4.5":
+  version: 0.4.5
+  resolution: "eslint-plugin-react-refresh@npm:0.4.5"
   peerDependencies:
     eslint: ">=7"
-  checksum: 6b93f43cef5f69c18751db3267ce6cc7cb88f07061df28fc12401be56d93f37134f2a794c760f51cd5f84c5e81d81b003ef761ca76e7674646808b82884aa356
+  checksum: 953e665f6aaf097291a2bb07fde05466338aecd169bcd6faa708b50166912e3a757f45a45252cf7738b5e0d986224d363cc227864e98c979fe9978770b2b9f42
   languageName: node
   linkType: hard
 
@@ -4115,7 +4115,7 @@ __metadata:
     "@mantine/hooks": 5.10.5
     "@mantine/next": 5.10.5
     "@mantine/notifications": 5.10.5
-    "@slashnephy/eslint-config": 2.0.74
+    "@slashnephy/eslint-config": 2.0.77
     "@slashnephy/prettier-config": 1.0.55
     "@tabler/icons-react": 2.38.0
     "@tanstack/react-query": 4.35.7
@@ -6847,13 +6847,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.3.2":
-  version: 5.3.2
-  resolution: "typescript@npm:5.3.2"
+"typescript@npm:5.3.3":
+  version: 5.3.3
+  resolution: "typescript@npm:5.3.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d92534dda639eb825db013203404c1fabca8ac630564283c9e7dc9e64fd9c9346c2de95ecebdf3e6e8c1c32941bca1cfe0da37877611feb9daf8feeaea58d230
+  checksum: 2007ccb6e51bbbf6fde0a78099efe04dc1c3dfbdff04ca3b6a8bc717991862b39fd6126c0c3ebf2d2d98ac5e960bcaa873826bb2bb241f14277034148f41f6a2
   languageName: node
   linkType: hard
 
@@ -6867,13 +6867,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.3.2#~builtin<compat/typescript>":
-  version: 5.3.2
-  resolution: "typescript@patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=29ae49"
+"typescript@patch:typescript@5.3.3#~builtin<compat/typescript>":
+  version: 5.3.3
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c034461079fbfde3cb584ddee52afccb15b6e32a0ce186d0b2719968786f7ca73e1b07f71fac4163088790b16811c6ccf79680de190664ef66ff0ba9c1fe4a23
+  checksum: f61375590b3162599f0f0d5b8737877ac0a7bc52761dbb585d67e7b8753a3a4c42d9a554c4cc929f591ffcf3a2b0602f65ae3ce74714fd5652623a816862b610
   languageName: node
   linkType: hard
 
