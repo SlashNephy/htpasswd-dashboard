@@ -19,7 +19,15 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
   }
 
   const { service: key } = req.query
-  const htpasswd = await getHtpasswdBackendInstance(key as string)
+  if (typeof key !== 'string') {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+    })
+
+    return
+  }
+
+  const htpasswd = await getHtpasswdBackendInstance(key)
   if (htpasswd === undefined) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
@@ -48,8 +56,8 @@ export const handler: NextApiHandler<IssueResponse> = async (req, res) => {
       const credential = await htpasswd.append(email)
 
       res.status(StatusCodes.OK).json({
-        success: true,
         ...credential,
+        success: true,
       })
     })
   } catch (e: unknown) {

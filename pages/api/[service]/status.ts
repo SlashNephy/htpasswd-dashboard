@@ -8,7 +8,15 @@ import type { NextApiHandler } from 'next'
 
 export const handler: NextApiHandler<StatusResponse> = async (req, res) => {
   const { service: key } = req.query
-  const htpasswd = await getHtpasswdBackendInstance(key as string)
+  if (typeof key !== 'string') {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+    })
+
+    return
+  }
+
+  const htpasswd = await getHtpasswdBackendInstance(key)
   if (htpasswd === undefined) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,

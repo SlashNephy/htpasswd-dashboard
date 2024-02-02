@@ -1132,14 +1132,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.6":
-  version: 18.2.6
-  resolution: "@types/react@npm:18.2.6"
+"@types/react@npm:18.2.51":
+  version: 18.2.51
+  resolution: "@types/react@npm:18.2.51"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: dea9d232d8df7ac357367a69dcb557711ab3d5501807ffa77cebeee73d49ee94d095f298e36853c63ed47cce097eee4c7eae2aaa8c02fac3f0171ec1b523a819
+  checksum: 1ab49e51e6314cefb9a162e9ac3a15a0474c82a0737f12f3a9628ccba555ab6645d2449152e7a5fc3ff650a7139a4718715af2c5ae9bc46b0533e98036706f84
   languageName: node
   linkType: hard
 
@@ -4216,7 +4216,7 @@ __metadata:
     "@types/gravatar": 1.8.4
     "@types/jsonwebtoken": 9.0.3
     "@types/node": 18.18.3
-    "@types/react": 18.2.6
+    "@types/react": 18.2.51
     "@types/react-dom": 18.2.4
     async-mutex: 0.4.0
     bcrypt: 5.1.1

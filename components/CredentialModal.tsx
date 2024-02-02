@@ -17,7 +17,7 @@ import {
   IconClipboardText,
   IconExclamationMark,
 } from '@tabler/icons-react'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import type { Credential } from '../lib/htpasswd/backend'
 import type { Service } from '../lib/services'
@@ -32,14 +32,23 @@ export function CredentialModal({
   credential: Credential
 }): React.JSX.Element {
   const clipboard = useClipboard()
-  const handleClipboardClick = (value: string) => {
-    clipboard.copy(value)
-    showNotification({
-      message: 'クリップボードにコピーしました。',
-      color: 'green',
-      icon: <IconClipboardCheck />,
-    })
-  }
+  const handleClipboardClick = useCallback(
+    (value: string) => {
+      clipboard.copy(value)
+      showNotification({
+        message: 'クリップボードにコピーしました。',
+        color: 'green',
+        icon: <IconClipboardCheck />,
+      })
+    },
+    [clipboard]
+  )
+  const handleClickCopyUsername = useCallback(() => {
+    handleClipboardClick(credential.username)
+  }, [credential.username, handleClipboardClick])
+  const handleClickCopyPassword = useCallback(() => {
+    handleClipboardClick(credential.password)
+  }, [credential.password, handleClipboardClick])
 
   return (
     <Modal {...props}>
@@ -64,9 +73,7 @@ export function CredentialModal({
           <Tooltip label="ユーザー名をコピー" position="right">
             <ActionIcon
               style={{ display: 'inline' }}
-              onClick={() => {
-                handleClipboardClick(credential.username)
-              }}
+              onClick={handleClickCopyUsername}
             >
               <IconClipboardText size={18} />
             </ActionIcon>
@@ -78,9 +85,7 @@ export function CredentialModal({
           <Tooltip label="パスワードをコピー" position="right">
             <ActionIcon
               style={{ display: 'inline' }}
-              onClick={() => {
-                handleClipboardClick(credential.password)
-              }}
+              onClick={handleClickCopyPassword}
             >
               <IconClipboardText size={18} />
             </ActionIcon>

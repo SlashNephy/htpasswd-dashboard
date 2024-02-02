@@ -40,7 +40,6 @@ export default function MyApp({
             }}
           >
             <NotificationsProvider autoClose={7000} position="top-right">
-              {/* @ts-expect-error temporary fix for broken type */}
               <Component {...pageProps} />
             </NotificationsProvider>
           </MantineProvider>

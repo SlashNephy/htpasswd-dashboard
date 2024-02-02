@@ -17,6 +17,16 @@
     "lint:prettier": "prettier --check .",
     "start": "next start"
   },
+  "eslintConfig": {
+    "extends": [
+      "@slashnephy/eslint-config"
+    ],
+    "rules": {
+      "import/extensions": "off",
+      "@susisu/safe-typescript/no-type-assertion": "off",
+      "@susisu/safe-typescript/no-unsafe-object-property-check": "off"
+    }
+  },
   "dependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
@@ -47,20 +57,12 @@
     "@types/gravatar": "1.8.4",
     "@types/jsonwebtoken": "9.0.3",
     "@types/node": "18.18.3",
-    "@types/react": "18.2.6",
+    "@types/react": "18.2.51",
     "@types/react-dom": "18.2.4",
     "concurrently": "8.2.1",
     "eslint": "8.50.0",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
   },
-  "packageManager": "yarn@3.6.4",
-  "eslintConfig": {
-    "extends": [
-      "@slashnephy/eslint-config"
-    ],
-    "rules": {
-      "import/extensions": "off"
-    }
-  }
+  "packageManager": "yarn@3.6.4"
 }

@@ -11,7 +11,6 @@ import {
 import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
 import gravatar from 'gravatar'
-import React from 'react'
 
 import { AppLayout } from '../components/AppLayout'
 import { ServiceCard } from '../components/ServiceCard'
@@ -20,9 +19,9 @@ import packageJson from '../package.json'
 
 import type { HelloResponse } from '../lib/api'
 import type { Service } from '../lib/services'
-import type { NextPage } from 'next'
+import type { ReactNode } from 'react'
 
-const Index: NextPage = () => {
+export default function Index(): ReactNode {
   const {
     data: hello,
     isLoading,
@@ -81,5 +80,3 @@ const Index: NextPage = () => {
     </AppLayout>
   )
 }
-
-export default Index

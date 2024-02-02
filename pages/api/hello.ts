@@ -13,8 +13,8 @@ const handler: NextApiHandler<HelloResponse> = async (req, res) => {
     const payload = await validateJwt(req.headers)
 
     res.status(StatusCodes.OK).json({
-      success: true,
       ...payload,
+      success: true,
     })
   } catch (error: unknown) {
     console.error(error)

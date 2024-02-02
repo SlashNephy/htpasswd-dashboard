@@ -2,7 +2,9 @@ import { ActionIcon, useMantineColorScheme } from '@mantine/core'
 import { IconMoonStars, IconSun } from '@tabler/icons-react'
 import React from 'react'
 
-export const ToggleThemeButton: React.FC = () => {
+import type { ReactNode } from 'react'
+
+export function ToggleThemeButton(): ReactNode {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
   return (
