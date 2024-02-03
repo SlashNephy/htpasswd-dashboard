@@ -856,9 +856,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kubernetes/client-node@npm:0.19.0":
-  version: 0.19.0
-  resolution: "@kubernetes/client-node@npm:0.19.0"
+"@kubernetes/client-node@npm:0.20.0":
+  version: 0.20.0
+  resolution: "@kubernetes/client-node@npm:0.20.0"
   dependencies:
     "@types/js-yaml": ^4.0.1
     "@types/node": ^20.1.1
@@ -878,7 +878,7 @@ __metadata:
   dependenciesMeta:
     openid-client:
       optional: true
-  checksum: d29ccfb562ac51a81f74de570eb832d150be6b73ba887ae1be682df9a34c3ab846d4d4ba74f0a9f0e0ce4da573f949ba712115e1d0513148cdf683a22d729e7f
+  checksum: c7c2ec9c597b5579ec452bcc13647feeaa3eaf93601afa5d9a4e06b5fe91d2cafa444a1da07b5330a7596f0e07e107d6abe4acabc5998f7bedf43cd0ab8bf343
   languageName: node
   linkType: hard
 
@@ -5075,7 +5075,7 @@ __metadata:
   dependencies:
     "@emotion/react": 11.11.3
     "@emotion/server": 11.11.0
-    "@kubernetes/client-node": 0.19.0
+    "@kubernetes/client-node": 0.20.0
     "@mantine/core": 5.10.5
     "@mantine/hooks": 5.10.5
     "@mantine/next": 5.10.5
