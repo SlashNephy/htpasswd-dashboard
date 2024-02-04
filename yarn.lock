@@ -1457,22 +1457,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tabler/icons-react@npm:2.38.0":
-  version: 2.38.0
-  resolution: "@tabler/icons-react@npm:2.38.0"
+"@tabler/icons-react@npm:2.47.0":
+  version: 2.47.0
+  resolution: "@tabler/icons-react@npm:2.47.0"
   dependencies:
-    "@tabler/icons": 2.38.0
+    "@tabler/icons": 2.47.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0
-  checksum: 82ff7c59c365b4b7cb74e511cdc5cb1630915d7aa7e9522483aed307d9688a6b8b8510a3765aef3e8694483ea44ef32232285b9e5b0ebe1c2beddbd7f619167a
+  checksum: f896a1fc146272d289a2a101e36027c08a6618cf930647e1b7b7dafd684aed6a4e63cc90b54b5b6742570125556c51162be4f1119d2881291c3e3a0f9427bc25
   languageName: node
   linkType: hard
 
-"@tabler/icons@npm:2.38.0":
-  version: 2.38.0
-  resolution: "@tabler/icons@npm:2.38.0"
-  checksum: 030af0ed999103334a9d823aae7069a308b2fffb79b89ac6b7a46ba27eed4f9527b07c77c961c688234808ba93bc1e7b7c401dfff3e386cf342e426754ceb096
+"@tabler/icons@npm:2.47.0":
+  version: 2.47.0
+  resolution: "@tabler/icons@npm:2.47.0"
+  checksum: 610582883f22510a3528fd7b5d0613faf815d6b0f48d42514ed080ac083bdbcbc3a7e49c62819c5c479d2d9d30dbb3e1cfc9978c0160f3900724890ec57caaab
   languageName: node
   linkType: hard
 
@@ -4725,7 +4725,7 @@ __metadata:
     "@mantine/notifications": 5.10.5
     "@slashnephy/eslint-config": 2.1.4
     "@slashnephy/prettier-config": 1.0.73
-    "@tabler/icons-react": 2.38.0
+    "@tabler/icons-react": 2.47.0
     "@tanstack/react-query": 4.36.1
     "@types/bcrypt": 5.0.2
     "@types/gravatar": 1.8.6
