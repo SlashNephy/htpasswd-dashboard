@@ -2409,12 +2409,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-mutex@npm:0.4.1":
-  version: 0.4.1
-  resolution: "async-mutex@npm:0.4.1"
+"async-mutex@npm:0.5.0":
+  version: 0.5.0
+  resolution: "async-mutex@npm:0.5.0"
   dependencies:
     tslib: ^2.4.0
-  checksum: cb529c0d257c8ff8e5b26c81b36127a255e545edee2c42c76247d533b89a7664037d95f33130f964de49b111ad3324ead8dcccd419c47acdfeb7413ed93063a1
+  checksum: be1587f4875f3bb15e34e9fcce82eac2966daef4432c8d0046e61947fb9a1b95405284601bc7ce4869319249bc07c75100880191db6af11d1498931ac2a2f9ea
   languageName: node
   linkType: hard
 
@@ -4859,7 +4859,7 @@ __metadata:
     "@types/node": 20.11.25
     "@types/react": 18.2.64
     "@types/react-dom": 18.2.21
-    async-mutex: 0.4.1
+    async-mutex: 0.5.0
     bcrypt: 5.1.1
     concurrently: 8.2.2
     eslint: 8.57.0
