@@ -1,11 +1,11 @@
-FROM --platform=$BUILDPLATFORM node:20.12.1-bullseye-slim@sha256:df8a4d7383cf3da97743a9cae728909b7220751806a4f07723b2def4ac64be34 AS cache
+FROM --platform=$BUILDPLATFORM node:20.12.2-bullseye-slim@sha256:f8c4cf58c27830c78d6e2b351e55cad65f5e388b892e76eac068a64bf6ba1caf AS cache
 WORKDIR /app
 
 COPY ./.yarn/ ./.yarn/
 COPY ./package.json ./.yarnrc.yml ./yarn.lock ./
 RUN yarn --immutable
 
-FROM --platform=$BUILDPLATFORM node:20.12.1-bullseye-slim@sha256:df8a4d7383cf3da97743a9cae728909b7220751806a4f07723b2def4ac64be34 AS build
+FROM --platform=$BUILDPLATFORM node:20.12.2-bullseye-slim@sha256:f8c4cf58c27830c78d6e2b351e55cad65f5e388b892e76eac068a64bf6ba1caf AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 
@@ -13,7 +13,7 @@ COPY --from=cache /app/node_modules/ ./node_modules/
 COPY ./ ./
 RUN yarn build
 
-FROM --platform=$TARGETPLATFORM node:20.12.1-bullseye-slim@sha256:df8a4d7383cf3da97743a9cae728909b7220751806a4f07723b2def4ac64be34 AS runtime
+FROM --platform=$TARGETPLATFORM node:20.12.2-bullseye-slim@sha256:f8c4cf58c27830c78d6e2b351e55cad65f5e388b892e76eac068a64bf6ba1caf AS runtime
 ENV NODE_ENV="production"
 ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
