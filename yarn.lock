@@ -1667,12 +1667,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.12.14":
-  version: 20.12.14
-  resolution: "@types/node@npm:20.12.14"
+"@types/node@npm:20.14.2":
+  version: 20.14.2
+  resolution: "@types/node@npm:20.14.2"
   dependencies:
     undici-types: ~5.26.4
-  checksum: f6071bcf87f04f9bcc04d50f5ae2b29bf7d45410390e3ce0a29ed78b2d7420de710f3416f8432541b9f297a344b80c9d570de2848fefe3f801688270fd8ee5a5
+  checksum: 265362479b8f3b50fcd1e3f9e9af6121feb01a478dff0335ae67cccc3babfe45d0f12209d3d350595eebd7e67471762697b877c380513f8e5d27a238fa50c805
   languageName: node
   linkType: hard
 
@@ -4856,7 +4856,7 @@ __metadata:
     "@types/bcrypt": 5.0.2
     "@types/gravatar": 1.8.6
     "@types/jsonwebtoken": 9.0.6
-    "@types/node": 20.12.14
+    "@types/node": 20.14.2
     "@types/react": 18.3.3
     "@types/react-dom": 18.3.0
     async-mutex: 0.5.0
