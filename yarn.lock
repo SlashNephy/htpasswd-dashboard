@@ -1632,16 +1632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.14.13":
-  version: 20.14.13
-  resolution: "@types/node@npm:20.14.13"
-  dependencies:
-    undici-types: ~5.26.4
-  checksum: 928e877aadfea75f3a14c38223674b3a9fb206340ab7b2af3ffe7040c384a55678f235860f6652d18026fd59e44c237d060e3f5ce7b62b1b9e6fb593c9ef39b9
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^20.1.1":
+"@types/node@npm:20.14.14, @types/node@npm:^20.1.1":
   version: 20.14.14
   resolution: "@types/node@npm:20.14.14"
   dependencies:
@@ -4911,7 +4902,7 @@ __metadata:
     "@types/bcrypt": 5.0.2
     "@types/gravatar": 1.8.6
     "@types/jsonwebtoken": 9.0.6
-    "@types/node": 20.14.13
+    "@types/node": 20.14.14
     "@types/react": 18.3.3
     "@types/react-dom": 18.3.0
     async-mutex: 0.5.0
