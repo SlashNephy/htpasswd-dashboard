@@ -61,7 +61,7 @@
     "@types/react-dom": "18.3.1",
     "concurrently": "9.1.0",
     "eslint": "8.57.1",
-    "prettier": "3.4.1",
+    "prettier": "3.4.2",
     "typescript": "5.7.2"
   },
   "packageManager": "yarn@3.8.7"
