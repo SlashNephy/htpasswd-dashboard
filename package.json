@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@emotion/react": "11.13.5",
+    "@emotion/react": "11.14.0",
     "@emotion/server": "11.11.0",
     "@kubernetes/client-node": "0.22.3",
     "@mantine/core": "5.10.5",
