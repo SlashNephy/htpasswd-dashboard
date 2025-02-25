@@ -4872,7 +4872,7 @@ __metadata:
     http-status-codes: 2.3.0
     jsonwebtoken: 9.0.2
     jwks-rsa: 3.1.0
-    nanoid: 5.1.0
+    nanoid: 5.1.2
     next: 14.2.24
     prettier: 3.5.2
     react: 18.3.1
@@ -6057,12 +6057,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:5.1.0":
-  version: 5.1.0
-  resolution: "nanoid@npm:5.1.0"
+"nanoid@npm:5.1.2":
+  version: 5.1.2
+  resolution: "nanoid@npm:5.1.2"
   bin:
     nanoid: bin/nanoid.js
-  checksum: 753a25383a33e024ba41ef6bcf49c9750ea49af67c08e81235fb9048182af43f1f6c7c0dbf9d7c2abfb11a781916000c225532f593368153a6289c6997fe6b5e
+  checksum: ada00d1a3f43ac037d2d9cb96fc33e60d8d522f5451a0b02d6d13548b534df1ba797f4d86cc821ad892b6761650b34f1c979bf5577295c2046b7d7b34b59f48e
   languageName: node
   linkType: hard
 
