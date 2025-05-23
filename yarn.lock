@@ -1689,12 +1689,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.15.17":
-  version: 22.15.17
-  resolution: "@types/node@npm:22.15.17"
+"@types/node@npm:22.15.21":
+  version: 22.15.21
+  resolution: "@types/node@npm:22.15.21"
   dependencies:
     undici-types: ~6.21.0
-  checksum: f83748c14c8ae3b7d1672af4009b892a5ae652c05c4b61c39e842711e232a0db37991611364aea9522fdf48290a8cc27403138bc479ef24ff0c9222319e7858b
+  checksum: 989f1ce3a99916a7298ae885210385fbcb339b07f8ef420b015d69dd68863aca68aeae07833736b300720d9394b8e1875600ce74166c24957d9907d29de0b788
   languageName: node
   linkType: hard
 
@@ -5039,7 +5039,7 @@ __metadata:
     "@types/bcrypt": 5.0.2
     "@types/gravatar": 1.8.6
     "@types/jsonwebtoken": 9.0.9
-    "@types/node": 22.15.17
+    "@types/node": 22.15.21
     "@types/react": 18.3.21
     "@types/react-dom": 18.3.7
     async-mutex: 0.5.0
