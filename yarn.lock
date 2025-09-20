@@ -5272,7 +5272,7 @@ __metadata:
     react-dom: 18.3.1
     ts-array-length: 0.1.3
     typescript: 5.9.2
-    zod: 3.25.76
+    zod: 4.1.10
   languageName: unknown
   linkType: soft
 
@@ -9029,9 +9029,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.25.76":
-  version: 3.25.76
-  resolution: "zod@npm:3.25.76"
-  checksum: c9a403a62b329188a5f6bd24d5d935d2bba345f7ab8151d1baa1505b5da9f227fb139354b043711490c798e91f3df75991395e40142e6510a4b16409f302b849
+"zod@npm:4.1.10":
+  version: 4.1.10
+  resolution: "zod@npm:4.1.10"
+  checksum: c0a3ae5fde548766b008770298cb89b7de4c7fb5ff90b318bcec8a93a16159b08a37f899cdf67f7f2f788c0cffa11aa770ab211c9d3ed7cf4dc725e28d1b3d22
   languageName: node
   linkType: hard
