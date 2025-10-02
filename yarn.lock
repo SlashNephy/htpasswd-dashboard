@@ -1927,13 +1927,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.3.24":
-  version: 18.3.24
-  resolution: "@types/react@npm:18.3.24"
+"@types/react@npm:18.3.25":
+  version: 18.3.25
+  resolution: "@types/react@npm:18.3.25"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: 852fd0430d721ceb431662ac90b6b41d6473ea55d29b5d92f7a81f4c6c397eb3b26a904fdd276fb71a5fad318d0d79cc0072867024611716bfb85e6b4907ae68
+  checksum: 33bb754ac0201cb0f4eed7f42c6c71e6fe4f00bc1b028a5a69d2383c77bfa33c4b99827299d525a0582dab697de4e9fda9e23b283dec1083f96704aea2157edd
   languageName: node
   linkType: hard
 
@@ -5242,7 +5242,7 @@ __metadata:
     "@types/gravatar": 1.8.6
     "@types/jsonwebtoken": 9.0.10
     "@types/node": 22.18.6
-    "@types/react": 18.3.24
+    "@types/react": 18.3.25
     "@types/react-dom": 18.3.7
     async-mutex: 0.5.0
     bcrypt: 5.1.1
