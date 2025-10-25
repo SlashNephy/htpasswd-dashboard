@@ -60,7 +60,7 @@
     "@types/react": "18.3.26",
     "@types/react-dom": "18.3.7",
     "concurrently": "9.2.1",
-    "eslint": "8.57.1",
+    "eslint": "9.38.0",
     "prettier": "3.6.2",
     "typescript": "5.9.3"
   },
