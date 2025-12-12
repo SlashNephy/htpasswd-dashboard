@@ -1202,10 +1202,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/env@npm:15.5.7"
-  checksum: 2d193f53726c45edfdc8952e3a52a54c2a725090aa614e8ffaf3e0bb872a6bdb91468ea60a0713859549ed5b0df8664db8c8e52117cd866695aefcc85b3c6a5a
+"@next/env@npm:15.5.8":
+  version: 15.5.8
+  resolution: "@next/env@npm:15.5.8"
+  checksum: e0abf8c84c6cfd59a0a2d64fe61bd7440e6e2c0b742f6015a635baf63c212456e096ce0511c45b6ae4f693f1b01ad903ac0dc86722082a2dc5153874858c1175
   languageName: node
   linkType: hard
 
@@ -5304,7 +5304,7 @@ __metadata:
     jsonwebtoken: 9.0.3
     jwks-rsa: 3.2.0
     nanoid: 5.1.6
-    next: 15.5.7
+    next: 15.5.8
     prettier: 3.7.4
     react: 18.3.1
     react-dom: 18.3.1
@@ -6513,11 +6513,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:15.5.7":
-  version: 15.5.7
-  resolution: "next@npm:15.5.7"
+"next@npm:15.5.8":
+  version: 15.5.8
+  resolution: "next@npm:15.5.8"
   dependencies:
-    "@next/env": 15.5.7
+    "@next/env": 15.5.8
     "@next/swc-darwin-arm64": 15.5.7
     "@next/swc-darwin-x64": 15.5.7
     "@next/swc-linux-arm64-gnu": 15.5.7
@@ -6568,7 +6568,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: b31349fa630c5238b008a1192e06c33b72fc04652b37113b5982ab26d59c0a09b9ba224d508dc7eb582ec39e5313f9dd2d5dbc2b64c9b72310cebd111479fb59
+  checksum: 17dcef444465226a162cee513896fa6b7e6096a5616a79a63c2e3c20a35ce07890b6a46198f17d83c08eed40b5aa0bc6b6be2ad686d9faf9a8ddb15355a6ffce
   languageName: node
   linkType: hard
 
